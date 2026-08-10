@@ -1,0 +1,12 @@
+interface:
+  display_name: "Calibre MCP"
+  short_description: "Search and read a Calibre ebook library safely"
+  default_prompt: "Use $calibre-mcp to search my Calibre library and inspect the best matching book."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "calibre"
+      description: "Local calibre-mcp server"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

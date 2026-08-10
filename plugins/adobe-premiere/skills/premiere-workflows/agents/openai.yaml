@@ -1,0 +1,4 @@
+interface:
+  display_name: "Premiere MCP Workflows"
+  short_description: "Edit Premiere safely through MCP and UI control"
+  default_prompt: "Use $premiere-workflows to inspect my active Premiere project and plan a safe edit."

@@ -1,0 +1,12 @@
+interface:
+  display_name: "AutoCAD MCP Drafting"
+  short_description: "Drive AutoCAD and headless DXF drafting safely"
+  default_prompt: "Use $autocad-drafting-mcp to create and verify an AutoCAD drawing."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "autocad-mcp"
+      description: "Structured AutoCAD and headless DXF operations"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

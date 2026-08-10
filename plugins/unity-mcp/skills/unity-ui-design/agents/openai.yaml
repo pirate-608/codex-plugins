@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity UI Design"
+  short_description: "Design Unity UI Toolkit and uGUI interfaces"
+  default_prompt: "Use $unity-ui-design to create and visually validate this Unity interface."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

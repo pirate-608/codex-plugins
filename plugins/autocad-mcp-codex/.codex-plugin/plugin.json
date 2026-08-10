@@ -1,0 +1,32 @@
+{
+  "name": "autocad-mcp-codex",
+  "version": "0.1.0",
+  "description": "Create, inspect, edit, and export AutoCAD or headless DXF drawings through MCP.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/puran-water/autocad-mcp",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["autocad", "dwg", "dxf", "drafting", "pid", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "AutoCAD MCP",
+    "shortDescription": "Draft and inspect CAD drawings through MCP.",
+    "longDescription": "Connect Codex to AutoCAD or a headless ezdxf backend for structured drawing, layers, blocks, dimensions, annotations, P&ID operations, screenshots, exports, and verification.",
+    "developerName": "pirate-608",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/autocad-mcp-codex",
+    "defaultPrompt": [
+      "Create a dimensioned AutoCAD drawing and verify it.",
+      "Inspect this DWG or DXF without overwriting it.",
+      "Draft a P&ID and export a review image."
+    ],
+    "brandColor": "#E51050",
+    "composerIcon": "./assets/autocad-icon.png",
+    "logo": "./assets/autocad-icon.png"
+  }
+}

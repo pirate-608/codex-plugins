@@ -1,0 +1,32 @@
+{
+  "name": "calibre-library-tools",
+  "version": "0.1.0",
+  "description": "Search and curate Calibre libraries, analyze ebook structure, and validate EPUB XPath with MCP and Codex skills.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/caelum29/calibre-mcp",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["calibre", "epub", "ebooks", "xpath", "book-structure", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Calibre Library Tools",
+    "shortDescription": "Search, analyze, and curate Calibre libraries.",
+    "longDescription": "Run calibre-mcp with explicit write support and use focused skills for Calibre library operations, ebook structure analysis, EPUB navigation inspection, and namespace-safe XPath authoring and validation.",
+    "developerName": "pirate-608",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Search", "Read", "Analyze", "Write"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/calibre-library-tools",
+    "defaultPrompt": [
+      "Map this Calibre book's chapter structure and flag anomalies.",
+      "Write and validate a Calibre XPath for chapter headings.",
+      "Search my Calibre library and inspect a book."
+    ],
+    "brandColor": "#6B4F2A",
+    "composerIcon": "./assets/calibre-icon.png",
+    "logo": "./assets/calibre-icon.png"
+  }
+}

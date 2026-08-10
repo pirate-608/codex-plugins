@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "solidworks": {
+      "command": "python",
+      "args": [
+        "./mcp-server/server.py"
+      ],
+      "cwd": "./skills/solidworks-automation",
+      "startup_timeout_sec": 30,
+      "tool_timeout_sec": 300,
+      "default_tools_approval_mode": "writes"
+    }
+  }
+}

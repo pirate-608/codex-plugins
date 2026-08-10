@@ -1,0 +1,14 @@
+interface:
+  display_name: "After Effects MCP Workflows"
+  short_description: "Automate After Effects safely through ae-mcp"
+  default_prompt: "Use $after-effects-workflows to inspect my active After Effects project and plan a safe change."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "after_effects"
+      description: "Local ae-mcp stdio server connected to the After Effects CEP panel"
+      transport: "stdio"
+
+policy:
+  allow_implicit_invocation: true

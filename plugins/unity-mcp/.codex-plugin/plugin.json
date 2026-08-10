@@ -1,0 +1,32 @@
+{
+  "name": "unity-mcp",
+  "version": "10.1.2",
+  "description": "Build, inspect, debug, optimize, and release Unity projects through MCP for Unity 10.1.2.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/CoplayDev/unity-mcp",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["unity", "game-development", "2d", "3d", "mcp", "automation"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Unity MCP",
+    "shortDescription": "Build, debug, optimize, and release Unity projects.",
+    "longDescription": "Bundle MCP for Unity 10.1.2 with focused workflows for project setup, 2D and 3D creation, gameplay engineering, UI, animation and VFX, debugging and tests, performance profiling, and player builds.",
+    "developerName": "pirate-608",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/unity-mcp",
+    "defaultPrompt": [
+      "Inspect the connected Unity project and editor state.",
+      "Create and visually verify a Unity gameplay scene.",
+      "Run Unity tests and diagnose any failures."
+    ],
+    "brandColor": "#222C37",
+    "composerIcon": "./assets/unity-mcp-icon.png",
+    "logo": "./assets/unity-mcp-icon.png"
+  }
+}

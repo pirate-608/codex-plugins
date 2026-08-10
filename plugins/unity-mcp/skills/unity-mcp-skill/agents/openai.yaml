@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity MCP Orchestrator"
+  short_description: "Route complex Unity Editor work across MCP workflows"
+  default_prompt: "Use $unity-mcp-orchestrator to inspect and coordinate this Unity Editor task."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

@@ -1,0 +1,12 @@
+interface:
+  display_name: "Calibre Book Structure"
+  short_description: "Analyze logical, physical, and navigation structure"
+  default_prompt: "Use $calibre-analyze-book-structure to map this book's chapters and structural anomalies."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "calibre"
+      description: "Local calibre-mcp server"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

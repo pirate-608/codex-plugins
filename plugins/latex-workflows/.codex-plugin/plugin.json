@@ -1,0 +1,30 @@
+{
+  "name": "latex-workflows",
+  "version": "0.1.0",
+  "description": "Compile, troubleshoot, and validate LaTeX projects with Tectonic and MiKTeX-aware Codex workflows.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/latex-workflows",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "keywords": ["latex", "tectonic", "miktex", "typesetting", "documents"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "LaTeX Workflows",
+    "shortDescription": "Compile and validate LaTeX projects.",
+    "longDescription": "Compile simple LaTeX projects with Tectonic, detect when a fuller MiKTeX toolchain is needed, diagnose environment problems, and verify generated documents with a conservative build workflow.",
+    "developerName": "pirate-608",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write", "Run Commands"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/latex-workflows",
+    "defaultPrompt": [
+      "Compile this LaTeX project and verify the output.",
+      "Diagnose why this LaTeX document does not build.",
+      "Check whether this machine is ready for the project."
+    ],
+    "brandColor": "#008080",
+    "composerIcon": "./assets/latex-logo.svg",
+    "logo": "./assets/latex-logo.svg"
+  }
+}

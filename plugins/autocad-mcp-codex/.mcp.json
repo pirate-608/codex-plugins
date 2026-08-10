@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "autocad-mcp": {
+      "command": "uv",
+      "args": ["run", "--project", "./vendor/autocad-mcp", "python", "-m", "autocad_mcp"],
+      "cwd": ".",
+      "env": {
+        "AUTOCAD_MCP_BACKEND": "auto",
+        "AUTOCAD_MCP_IPC_DIR": "C:/temp/codex-autocad-mcp",
+        "AUTOCAD_MCP_IPC_TIMEOUT": "30",
+        "AUTOCAD_MCP_ONLY_TEXT": "false"
+      },
+      "startup_timeout_sec": 60,
+      "tool_timeout_sec": 300,
+      "default_tools_approval_mode": "writes"
+    }
+  }
+}

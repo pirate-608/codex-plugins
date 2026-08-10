@@ -1,0 +1,32 @@
+{
+  "name": "adobe-photoshop",
+  "version": "0.1.0",
+  "description": "Inspect and edit Adobe Photoshop documents through a Windows COM MCP server and guarded workflows.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/loonghao/photoshop-python-api-mcp-server",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["adobe", "photoshop", "psd", "image-editing", "mcp", "windows"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Adobe Photoshop",
+    "shortDescription": "Inspect and edit Photoshop through MCP.",
+    "longDescription": "Inspect the Photoshop session, active document and selection; create or open documents; add text and filled layers; and save verified PSD, PNG, or JPEG copies with overwrite guardrails.",
+    "developerName": "pirate-608",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/adobe-photoshop",
+    "defaultPrompt": [
+      "Inspect my Photoshop session without changing it.",
+      "Add a text layer and verify the document afterward.",
+      "Save a verified copy without overwriting files."
+    ],
+    "brandColor": "#31A8FF",
+    "composerIcon": "./assets/photoshop-icon.png",
+    "logo": "./assets/photoshop-icon.png"
+  }
+}

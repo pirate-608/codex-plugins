@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity Debugging & Testing"
+  short_description: "Diagnose Unity console, runtime, physics, and test failures"
+  default_prompt: "Use $unity-debug-testing to reproduce and fix this Unity issue."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

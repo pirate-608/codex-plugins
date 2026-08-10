@@ -1,0 +1,6 @@
+interface:
+  display_name: "Calibre EPUB XPath"
+  short_description: "Write and validate namespace-safe ebook XPath"
+  default_prompt: "Use $calibre-write-xpath to create and validate an XPath for these EPUB chapter headings."
+policy:
+  allow_implicit_invocation: true

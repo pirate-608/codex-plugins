@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity Build & Release"
+  short_description: "Configure, build, validate, and package Unity releases"
+  default_prompt: "Use $unity-build-release to produce and verify this Unity build."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity Gameplay Development"
+  short_description: "Implement Unity C# gameplay, prefabs, input, and tests"
+  default_prompt: "Use $unity-gameplay-development to implement and test this Unity gameplay feature."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

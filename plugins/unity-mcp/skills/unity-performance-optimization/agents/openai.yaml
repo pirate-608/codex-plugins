@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity Performance Optimization"
+  short_description: "Profile and optimize Unity CPU, GPU, memory, and rendering"
+  default_prompt: "Use $unity-performance-optimization to measure and improve this Unity bottleneck."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

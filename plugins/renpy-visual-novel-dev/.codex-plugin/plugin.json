@@ -1,0 +1,32 @@
+{
+  "name": "renpy-visual-novel-dev",
+  "version": "0.2.0",
+  "description": "Develop, inspect, test, and maintain Ren'Py visual novel projects with Codex workflows and MCP tools.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://www.renpy.org/doc/html/",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "AGPL-3.0-or-later",
+  "keywords": ["renpy", "visual-novel", "game-development", "narrative", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Ren'Py Visual Novel Development",
+    "shortDescription": "Build and maintain Ren'Py visual novels.",
+    "longDescription": "Inspect Ren'Py projects, edit scripts and routes, customize GUI assets, organize content, run lint and builds, check localization, and audit projects through bundled MCP tools and project-aware workflows.",
+    "developerName": "pirate-608",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write", "Run Commands"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/renpy-visual-novel-dev",
+    "defaultPrompt": [
+      "Review this Ren'Py scene for flow and syntax.",
+      "Add a new character route to this Ren'Py project.",
+      "Audit this Ren'Py project before a test build."
+    ],
+    "brandColor": "#B45309",
+    "composerIcon": "./assets/renpy-icon.png",
+    "logo": "./assets/renpy-icon.png"
+  }
+}

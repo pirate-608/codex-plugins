@@ -1,0 +1,14 @@
+interface:
+  display_name: "Photoshop MCP Workflows"
+  short_description: "Edit Photoshop documents safely through MCP"
+  default_prompt: "Use $photoshop-workflows to inspect my Photoshop session and plan a safe edit."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "photoshop"
+      description: "Local Photoshop MCP server using Windows COM"
+      transport: "stdio"
+
+policy:
+  allow_implicit_invocation: true

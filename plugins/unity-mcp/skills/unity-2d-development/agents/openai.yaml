@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity 2D Development"
+  short_description: "Build Unity 2D sprites, physics, levels, and gameplay"
+  default_prompt: "Use $unity-2d-development to build and verify this Unity 2D feature."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

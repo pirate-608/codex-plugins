@@ -1,0 +1,32 @@
+{
+  "name": "adobe-after-effects",
+  "version": "0.1.0",
+  "description": "Inspect and automate Adobe After Effects projects through ae-mcp and motion-design workflows.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/JUNKDOGE-JOE/after-effects-mcp",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["adobe", "after-effects", "motion-graphics", "animation", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Adobe After Effects",
+    "shortDescription": "Animate After Effects projects through MCP.",
+    "longDescription": "Inspect projects, automate compositions and layers, author expressions and animation, create checkpoints, verify representative rendered frames, and diagnose the local ae-mcp bridge.",
+    "developerName": "pirate-608",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/adobe-after-effects",
+    "defaultPrompt": [
+      "Inspect my active After Effects project without changing it.",
+      "Animate this composition and verify representative frames.",
+      "Diagnose the ae-mcp connection and the failing layer."
+    ],
+    "brandColor": "#9999FF",
+    "composerIcon": "./assets/after-effects-icon.png",
+    "logo": "./assets/after-effects-icon.png"
+  }
+}

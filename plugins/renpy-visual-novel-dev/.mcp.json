@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "renpy": {
+      "command": "uv",
+      "args": ["run", "--project", "./vendor/renpy-mcp", "python", "./scripts/start_renpy_mcp.py"],
+      "cwd": ".",
+      "env": {"RENPY_MCP_TIERS": "1,2,3"},
+      "startup_timeout_sec": 60,
+      "tool_timeout_sec": 300,
+      "default_tools_approval_mode": "writes"
+    }
+  }
+}

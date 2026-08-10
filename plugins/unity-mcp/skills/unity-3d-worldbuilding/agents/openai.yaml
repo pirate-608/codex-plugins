@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity 3D Worldbuilding"
+  short_description: "Create Unity 3D scenes, lighting, materials, and physics"
+  default_prompt: "Use $unity-3d-worldbuilding to create and visually verify this Unity 3D scene."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

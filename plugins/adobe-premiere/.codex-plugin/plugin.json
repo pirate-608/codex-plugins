@@ -1,0 +1,32 @@
+{
+  "name": "adobe-premiere",
+  "version": "0.2.0",
+  "description": "Inspect and edit Adobe Premiere Pro projects through a bundled MCP server and CEP bridge.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/hetpatel-11/Adobe_Premiere_Pro_MCP",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["adobe", "premiere-pro", "video-editing", "timeline", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Adobe Premiere Pro",
+    "shortDescription": "Edit Premiere Pro through MCP.",
+    "longDescription": "Inspect projects, manage media and sequences, edit timelines, apply effects, work with captions and audio, validate exports, and fall back to Windows UI control when Premiere scripting cannot reach an operation.",
+    "developerName": "pirate-608",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/adobe-premiere",
+    "defaultPrompt": [
+      "Inspect my active Premiere Pro project without changing it.",
+      "Build a rough-cut sequence from these clips.",
+      "Check the active sequence and prepare it for export."
+    ],
+    "brandColor": "#9999FF",
+    "composerIcon": "./assets/premiere-icon.png",
+    "logo": "./assets/premiere-icon.png"
+  }
+}

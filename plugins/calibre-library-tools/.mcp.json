@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "calibre": {
+      "command": "npx",
+      "args": ["-y", "calibre-mcp@0.7.2"],
+      "env": {
+        "CALIBRE_MCP_SERVER_URL": "http://localhost:8080",
+        "CALIBRE_MCP_ENABLE_WRITE": "1"
+      },
+      "startup_timeout_sec": 120,
+      "tool_timeout_sec": 300
+    }
+  }
+}

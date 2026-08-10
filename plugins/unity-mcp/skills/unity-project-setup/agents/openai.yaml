@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity Project Setup"
+  short_description: "Configure Unity packages, settings, tags, and pipelines"
+  default_prompt: "Use $unity-project-setup to inspect and configure this Unity project safely."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"

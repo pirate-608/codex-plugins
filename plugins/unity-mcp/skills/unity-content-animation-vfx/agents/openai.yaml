@@ -1,0 +1,10 @@
+interface:
+  display_name: "Unity Content, Animation & VFX"
+  short_description: "Build Unity assets, animation, audio, shaders, and VFX"
+  default_prompt: "Use $unity-content-animation-vfx to build and verify this Unity content workflow."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "unity-mcp"
+      description: "Unity MCP server"
