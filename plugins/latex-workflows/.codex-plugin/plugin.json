@@ -1,6 +1,6 @@
 {
   "name": "latex-workflows",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compile, troubleshoot, and validate LaTeX projects with Tectonic and MiKTeX-aware Codex workflows.",
   "author": {
     "name": "pirate-608",
@@ -25,6 +25,7 @@
     ],
     "brandColor": "#008080",
     "composerIcon": "./assets/latex-logo.svg",
-    "logo": "./assets/latex-logo.svg"
+    "logo": "./assets/latex-logo.svg",
+    "logoDark": "./assets/latex-logo-dark.svg"
   }
 }
