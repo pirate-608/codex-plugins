@@ -1,5 +1,7 @@
 # pirate-608 Codex Plugins
 
+English | [简体中文](README.zh-CN.md)
+
 A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, and Calibre workflows.
 
 ## Add the marketplace
@@ -8,10 +10,41 @@ A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, and Cali
 codex plugin marketplace add git@github.com:pirate-608/codex-plugins.git
 ~~~
 
+If SSH is unavailable, use HTTPS:
+
+~~~sh
+codex plugin marketplace add https://github.com/pirate-608/codex-plugins.git
+~~~
+
 Install a plugin with its stable ID and marketplace name:
 
 ~~~sh
 codex plugin add unity-mcp@pirate-608-codex-plugins
+~~~
+
+## Configure with AI
+
+Copy this prompt into Codex or another coding agent:
+
+~~~text
+Configure this Codex plugin marketplace for me:
+
+- SSH repository: git@github.com:pirate-608/codex-plugins.git
+- HTTPS fallback: https://github.com/pirate-608/codex-plugins.git
+- Expected marketplace name: pirate-608-codex-plugins
+
+Work autonomously and complete the setup:
+1. Inspect the installed Codex CLI and its plugin marketplace help before running commands.
+2. List the configured marketplaces. If this exact marketplace already exists, refresh it with
+   the supported marketplace upgrade command instead of creating a duplicate.
+3. If it is missing, add it with the SSH URL. If SSH connectivity or authentication fails, retry
+   with the HTTPS URL.
+4. Preserve all unrelated marketplaces and settings. Do not install individual plugins unless I
+   explicitly ask.
+5. Verify that the marketplace is available and that its name is pirate-608-codex-plugins, then
+   use the plugin list command to report its available plugin IDs.
+6. Report the commands run and the final result. Ask me only if authentication, approval, or a
+   missing prerequisite prevents completion. Never print credentials or tokens.
 ~~~
 
 ## Plugins
