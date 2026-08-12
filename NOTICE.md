@@ -6,7 +6,7 @@ license terms remain with their respective authors and upstream projects.
 | Plugin | Upstream or origin | Declared terms |
 | --- | --- | --- |
 | Unity MCP | <https://github.com/CoplayDev/unity-mcp> | MIT |
-| Ren'Py Visual Novel Development | <https://github.com/fracturedring/renpy-mcp> | AGPL-3.0-or-later for the vendored Ren'Py MCP component |
+| Ren'Py Visual Novel Development | <https://github.com/fracturedring/renpy-mcp>; optional runtime <https://github.com/alex-jordan547/renforge-mcp> | AGPL-3.0-or-later for the vendored Ren'Py MCP component; RenForge 0.7.0 is MIT and is fetched by uvx |
 | LaTeX Workflows | Local workflow package | See the plugin files; no repository-wide license is asserted |
 | SolidWorks Automation | <https://github.com/wzyn20051216/solidworks-automation-skill> | MIT |
 | AutoCAD MCP | <https://github.com/puran-water/autocad-mcp> | See the bundled upstream files |

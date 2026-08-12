@@ -49,6 +49,10 @@ Important conventions:
 - Compiled `.rpyc` and `.rpymc` files can matter for released save compatibility, but do not edit them by hand.
 
 ## Workflow
+   - Route image creation, character expression derivation, chroma-key cleanup,
+     deterministic resizing, and asset provenance through the companion
+     `renpy-asset-generation` skill. Keep script authoring and asset registration
+     in the bundled `renpy` MCP.
    - Prefer the bundled `renpy` MCP tools when available. Begin with
      `get_project_overview`, then use focused readers such as `read_label`,
      `read_screen`, `list_audio`, and `find_invalid_jumps` before editing.
@@ -78,6 +82,8 @@ Important conventions:
    - Prefer `images/`, `audio/`, and `gui/` subfolders that match the existing project pattern.
    - Do not add large placeholder binaries unless the user asked for actual assets.
    - For user-provided reference audio/art, keep generated game-ready copies separate from `audio/references/` unless the project already uses it as source.
+   - For generated raster art, use `renpy-asset-generation`; never introduce a
+     Gemini/Nano Banana dependency or silently fall back to an API-key-based image service.
 
 5. GUI and screens:
    - Use existing `gui.rpy` variables and `screens.rpy` patterns before introducing new UI systems.
@@ -88,6 +94,9 @@ Important conventions:
    - Recognize `game/tl/<language>/` as translation output.
    - Avoid editing generated translation skeletons unless the user is localizing content.
    - When adding translatable strings to options or UI, preserve `_()` and `_p()` patterns already used by the template.
+   - When CJK text is present, confirm that the project bundles or explicitly
+     configures a licensed CJK-capable font. Warn when none is detected; do not
+     download a font automatically.
 
 7. Verification:
    - If a Ren'Py SDK path is available, prefer the official CLI:
@@ -97,6 +106,13 @@ Important conventions:
      Use `launch_preview`, `get_preview_status`, and `stop_preview` for a
      controlled playtest. Use `warp_to` to inspect a label without replaying
      earlier scenes.
+   - For runtime visual verification, prefer the optional `renforge` MCP:
+     inspect `renforge_info`, launch with `renforge_launch`, poll
+     `renforge_launch_status`, then use `renforge_screenshot`,
+     `renforge_scene_tree`, and `renforge_measure`. Stop the session with
+     `renforge_stop`. If RenForge is unavailable or cannot install offline,
+     report the degradation and continue with `launch_preview`, `warp_to`, and
+     static diagnostics from the bundled `renpy` MCP.
      - Windows lint: `.\lib\py3-windows-x86_64\python.exe renpy.py <project-root> lint`
      - Windows distribute: `.\lib\py3-windows-x86_64\python.exe renpy.py launcher distribute <project-root> --destination <output>`
    - If the SDK is not available, run static checks only and clearly report that runtime lint/build was not executed.

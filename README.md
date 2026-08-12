@@ -52,7 +52,7 @@ Work autonomously and complete the setup:
 | Plugin ID | Display name | Focus |
 | --- | --- | --- |
 | unity-mcp | Unity MCP | Unity project setup, 2D/3D, gameplay, UI, VFX, debugging, optimization, and builds |
-| renpy-visual-novel-dev | Ren'Py Visual Novel Development | Ren'Py project development and maintenance |
+| renpy-visual-novel-dev | Ren'Py Visual Novel Development | Guarded authoring, Codex-native asset generation, and runtime visual testing |
 | latex-workflows | LaTeX Workflows | LaTeX compilation, troubleshooting, and validation |
 | solidworks-automation | SolidWorks Automation | SolidWorks COM and MCP automation |
 | autocad-mcp-codex | AutoCAD MCP | AutoCAD drafting and inspection through MCP |
@@ -66,6 +66,19 @@ Work autonomously and complete the setup:
 Each plugin declares its own runtime integration. Depending on the plugin, the host machine may
 need the relevant desktop application plus tools such as Python, uv/uvx, Node.js/npx, or
 PowerShell on PATH. Commercial desktop applications and user credentials are not included.
+
+### Ren'Py image and runtime workflow
+
+The Ren'Py plugin uses Codex's built-in image generation for backgrounds, CGs, sprites, and UI
+art, so its default asset workflow does not require Gemini, Nano Banana, `GEMINI_API_KEY`, or
+`OPENAI_API_KEY`. Generated project assets are normalized locally and recorded in a project-side
+manifest before the bundled Ren'Py MCP registers and validates them. If built-in image generation
+is unavailable, the workflow accepts user-provided art and does not silently switch providers.
+
+Optional live screenshots, scene inspection, layout measurement, and runtime control use the
+MIT-licensed RenForge 0.7.0 package. `uvx` downloads this pinned package on first use, which requires
+network access; the bundled authoring MCP and its static diagnostics remain available when RenForge
+cannot start.
 
 ## Repository layout
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ren'Py Asset Generation"
+  short_description: "Generate and prepare consistent Ren'Py visual assets"
+  default_prompt: "Use $renpy-asset-generation to create a game-ready background or character sprite for my Ren'Py project."

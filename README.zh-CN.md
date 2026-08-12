@@ -50,7 +50,7 @@ codex plugin add unity-mcp@pirate-608-codex-plugins
 | 插件 ID | 显示名称 | 用途 |
 | --- | --- | --- |
 | unity-mcp | Unity MCP | Unity 项目配置、2D/3D、玩法、UI、VFX、调试、优化与构建发布 |
-| renpy-visual-novel-dev | Ren'Py Visual Novel Development | Ren'Py 视觉小说项目开发与维护 |
+| renpy-visual-novel-dev | Ren'Py Visual Novel Development | 受控创作、Codex 原生素材生成与运行时视觉测试 |
 | latex-workflows | LaTeX Workflows | LaTeX 编译、故障排查与验证 |
 | solidworks-automation | SolidWorks Automation | SolidWorks COM 与 MCP 自动化 |
 | autocad-mcp-codex | AutoCAD MCP | 通过 MCP 完成 AutoCAD 绘图与检查 |
@@ -63,6 +63,17 @@ codex plugin add unity-mcp@pirate-608-codex-plugins
 
 每个插件会声明自己的运行时集成。根据插件不同，主机可能需要安装对应桌面应用，以及
 Python、uv/uvx、Node.js/npx 或位于 PATH 中的 PowerShell。仓库不包含商业桌面软件和用户凭据。
+
+### Ren'Py 图片与运行时工作流
+
+Ren'Py 插件使用 Codex 内置图片生成能力制作背景、CG、立绘和 UI 素材，因此默认流程不需要
+Gemini、Nano Banana、`GEMINI_API_KEY` 或 `OPENAI_API_KEY`。项目素材会先在本地完成尺寸、
+透明度和命名规范化，并写入项目侧 manifest，再由内置 Ren'Py MCP 注册和验证。如果内置图片
+能力不可用，工作流只接受用户提供的素材，不会静默切换图片服务商。
+
+实时截图、场景检查、布局测量和运行时控制可选使用采用 MIT 许可证的 RenForge 0.7.0。
+`uvx` 会在首次使用时下载这个固定版本，因此届时需要网络；即使 RenForge 无法启动，内置的
+创作 MCP 和静态诊断仍然可以使用。
 
 ## 仓库结构
 

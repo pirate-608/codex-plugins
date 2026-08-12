@@ -22,6 +22,7 @@ ASSET_EXTENSIONS = {
     ".png",
     ".svg",
     ".ttf",
+    ".otf",
     ".wav",
     ".webm",
     ".webp",
@@ -88,10 +89,17 @@ def main() -> int:
     characters: list[tuple[str, str]] = []
     menus: list[str] = []
     tab_lines: list[str] = []
+    cjk_lines: list[str] = []
+    configured_fonts: set[str] = set()
 
     label_re = re.compile(r"^\s*label\s+([A-Za-z_][A-Za-z0-9_]*)\s*:", re.MULTILINE)
     char_re = re.compile(r"^\s*define\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*Character\((.*?)\)", re.MULTILINE)
     menu_re = re.compile(r"^\s*menu\s*:", re.MULTILINE)
+    cjk_re = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]")
+    font_re = re.compile(
+        r"(?:gui\.(?:text|name_text|interface_text|button_text)_font|style\.[A-Za-z0-9_]+\.font)"
+        r"\s*=\s*['\"]([^'\"]+)['\"]"
+    )
 
     for script in scripts:
         text = read_text(script)
@@ -102,14 +110,20 @@ def main() -> int:
             characters.append((str(rel), f"{match.group(1)} = Character({match.group(2)})"))
         if menu_re.search(text):
             menus.append(str(rel))
+        configured_fonts.update(font_re.findall(text))
         for number, line in enumerate(text.splitlines(), start=1):
             if "\t" in line:
                 tab_lines.append(f"{rel}:{number}")
+            if cjk_re.search(line):
+                cjk_lines.append(f"{rel}:{number}")
 
     print(f"Scripts: {len(scripts)} .rpy/.rpym files")
     print(f"Compiled scripts: {len(compiled)} .rpyc/.rpymc files")
     print(f"Assets: {len(assets)} recognized media/font files")
     print(f"Generated files skipped: {len(generated)} in game/cache or game/saves")
+    bundled_fonts = [path for path in assets if path.suffix.lower() in {".ttf", ".otf"}]
+    print(f"CJK text locations: {len(cjk_lines)}")
+    print(f"Bundled fonts: {len(bundled_fonts)}; configured font references: {len(configured_fonts)}")
 
     if labels:
         print("\nLabels:")
@@ -136,6 +150,12 @@ def main() -> int:
             print(f"  {item}")
         if len(tab_lines) > 40:
             print(f"  ... {len(tab_lines) - 40} more")
+
+    if cjk_lines and not bundled_fonts and not configured_fonts:
+        print("\nPotential localization issue: CJK text found but no bundled or configured font was detected")
+        for item in cjk_lines[:10]:
+            print(f"  {item}")
+        print("  Configure a licensed CJK-capable font; this audit never downloads fonts automatically.")
 
     return 0
 

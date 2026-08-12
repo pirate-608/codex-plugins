@@ -1,7 +1,7 @@
 {
   "name": "renpy-visual-novel-dev",
-  "version": "0.2.0",
-  "description": "Develop, inspect, test, and maintain Ren'Py visual novel projects with Codex workflows and MCP tools.",
+  "version": "0.3.0",
+  "description": "Develop, illustrate, inspect, test, and visually debug Ren'Py projects with Codex image workflows and MCP tools.",
   "author": {
     "name": "pirate-608",
     "url": "https://github.com/pirate-608"
@@ -9,21 +9,21 @@
   "homepage": "https://www.renpy.org/doc/html/",
   "repository": "https://github.com/pirate-608/codex-plugins",
   "license": "AGPL-3.0-or-later",
-  "keywords": ["renpy", "visual-novel", "game-development", "narrative", "mcp"],
+  "keywords": ["renpy", "visual-novel", "game-development", "narrative", "image-generation", "visual-testing", "mcp"],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Ren'Py Visual Novel Development",
-    "shortDescription": "Build and maintain Ren'Py visual novels.",
-    "longDescription": "Inspect Ren'Py projects, edit scripts and routes, customize GUI assets, organize content, run lint and builds, check localization, and audit projects through bundled MCP tools and project-aware workflows.",
+    "shortDescription": "Build, illustrate, and visually test Ren'Py novels.",
+    "longDescription": "Create and maintain Ren'Py projects with guarded script editing, Codex-native background and sprite generation, reproducible asset preparation, localization checks, lint and builds, plus optional RenForge runtime screenshots and visual diagnostics.",
     "developerName": "pirate-608",
     "category": "Developer Tools",
-    "capabilities": ["Interactive", "Read", "Write", "Run Commands"],
+    "capabilities": ["Interactive", "Read", "Write", "Run Commands", "Image Generation", "Visual Debugging"],
     "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/renpy-visual-novel-dev",
     "defaultPrompt": [
-      "Review this Ren'Py scene for flow and syntax.",
-      "Add a new character route to this Ren'Py project.",
-      "Audit this Ren'Py project before a test build."
+      "Generate a game-ready background for this Ren'Py scene.",
+      "Create a consistent character sprite and emotion set.",
+      "Run lint and visually inspect this Ren'Py route."
     ],
     "brandColor": "#B45309",
     "composerIcon": "./assets/renpy-icon.png",
