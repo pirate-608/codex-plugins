@@ -2,7 +2,7 @@
 
 English | [简体中文](README.zh-CN.md)
 
-A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, and Calibre workflows.
+A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, Calibre, and Windows file-search workflows.
 
 ## Add the marketplace
 
@@ -60,12 +60,17 @@ Work autonomously and complete the setup:
 | adobe-premiere | Adobe Premiere Pro | Premiere Pro editing workflows |
 | adobe-after-effects | Adobe After Effects | After Effects composition workflows |
 | calibre-library-tools | Calibre Library Tools | Calibre library analysis and curation |
+| everything-search | Everything Search | Fast local Windows file and folder discovery through voidtools ES |
 
 ## Requirements
 
 Each plugin declares its own runtime integration. Depending on the plugin, the host machine may
 need the relevant desktop application plus tools such as Python, uv/uvx, Node.js/npx, or
 PowerShell on PATH. Commercial desktop applications and user credentials are not included.
+
+Everything Search is Windows-only and requires the user-installed Everything application to be
+running plus `es.exe` on PATH (or configured through `EVERYTHING_ES_PATH`). The plugin does not
+bundle or automatically start either executable.
 
 ### Ren'Py image and runtime workflow
 

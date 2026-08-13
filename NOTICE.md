@@ -14,7 +14,8 @@ license terms remain with their respective authors and upstream projects.
 | Adobe Premiere Pro | <https://github.com/hetpatel-11/Adobe_Premiere_Pro_MCP> | See the bundled upstream files |
 | Adobe After Effects | <https://github.com/JUNKDOGE-JOE/after-effects-mcp> | MIT |
 | Calibre Library Tools | <https://www.npmjs.com/package/calibre-mcp> | See the upstream package |
+| Everything Search | <https://github.com/voidtools/ES> | Plugin wrapper is MIT; ES is MIT and is not bundled; Everything is user-installed |
 
-Adobe, AutoCAD, Calibre, LaTeX, Ren'Py, SolidWorks, Unity, and other product names are trademarks
+Adobe, AutoCAD, Calibre, Everything, LaTeX, Ren'Py, SolidWorks, Unity, and other product names are trademarks
 of their respective owners. This repository does not bundle the corresponding commercial desktop
 applications or grant rights to their trademarks.

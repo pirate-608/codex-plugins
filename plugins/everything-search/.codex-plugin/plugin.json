@@ -1,0 +1,32 @@
+{
+  "name": "everything-search",
+  "version": "0.1.0",
+  "description": "Find indexed Windows files and folders quickly through the voidtools Everything command-line interface.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://www.voidtools.com/support/everything/command_line_interface/",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["everything", "voidtools", "file-search", "windows", "es", "cli"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Everything Search",
+    "shortDescription": "Find local Windows files and folders instantly.",
+    "longDescription": "Search the local Everything index through a safe ES command wrapper with path scoping, file and folder filters, sorting, offsets, result limits, counts, regex options, and explicit diagnostics.",
+    "developerName": "pirate-608",
+    "category": "Productivity",
+    "capabilities": ["Read", "Run Commands", "Local File Search"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/everything-search",
+    "defaultPrompt": [
+      "Find the newest PDF files in my Downloads folder.",
+      "Locate folders matching this project name on my computer.",
+      "Count Python files under this workspace with Everything."
+    ],
+    "brandColor": "#F97316",
+    "composerIcon": "./assets/everything-icon.svg",
+    "logo": "./assets/everything-logo.svg",
+    "logoDark": "./assets/everything-logo-dark.svg"
+  }
+}

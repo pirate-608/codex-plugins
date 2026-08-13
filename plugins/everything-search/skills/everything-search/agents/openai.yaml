@@ -1,0 +1,4 @@
+interface:
+  display_name: "Everything Search"
+  short_description: "Find local Windows files instantly with Everything"
+  default_prompt: "Use $everything-search to find local files and folders matching my request."

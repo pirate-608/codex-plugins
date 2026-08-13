@@ -2,7 +2,7 @@
 
 [English](README.md) | 简体中文
 
-一个公开的 Codex 插件市场，提供 Unity、CAD、Adobe、LaTeX、Ren'Py 和 Calibre 相关工作流。
+一个公开的 Codex 插件市场，提供 Unity、CAD、Adobe、LaTeX、Ren'Py、Calibre 和 Windows 文件搜索相关工作流。
 
 ## 添加插件市场
 
@@ -58,11 +58,15 @@ codex plugin add unity-mcp@pirate-608-codex-plugins
 | adobe-premiere | Adobe Premiere Pro | Premiere Pro 视频编辑工作流 |
 | adobe-after-effects | Adobe After Effects | After Effects 合成与动画工作流 |
 | calibre-library-tools | Calibre Library Tools | Calibre 书库分析与维护 |
+| everything-search | Everything Search | 通过 voidtools ES 快速查找本地 Windows 文件和文件夹 |
 
 ## 运行要求
 
 每个插件会声明自己的运行时集成。根据插件不同，主机可能需要安装对应桌面应用，以及
 Python、uv/uvx、Node.js/npx 或位于 PATH 中的 PowerShell。仓库不包含商业桌面软件和用户凭据。
+
+Everything Search 仅支持 Windows，需要用户自行安装并运行 Everything，同时确保 `es.exe` 位于
+PATH，或通过 `EVERYTHING_ES_PATH` 指定其路径。插件不会捆绑或自动启动这些程序。
 
 ### Ren'Py 图片与运行时工作流
 
