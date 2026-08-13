@@ -59,7 +59,7 @@ codex plugin add unity-mcp@pirate-608-codex-plugins
 | adobe-after-effects | Adobe After Effects | After Effects 合成与动画工作流 |
 | calibre-library-tools | Calibre Library Tools | Calibre 书库分析与维护 |
 | everything-search | Everything Search | 通过 voidtools ES 快速查找本地 Windows 文件和文件夹 |
-| zju-learning-tools | ZJU Learning Tools | 查询浙大课程、受控下载，以及显式启用和确认后的普通作业提交 |
+| zju-learning-tools | ZJU Learning Tools | 浙大课程查询、受限 CLI 回退、受控下载与确认后的普通作业提交 |
 
 ## 运行要求
 
@@ -70,8 +70,9 @@ Everything Search 仅支持 Windows，需要用户自行安装并运行 Everythi
 PATH，或通过 `EVERYTHING_ES_PATH` 指定其路径。插件不会捆绑或自动启动这些程序。
 
 ZJU Learning Tools 面向 Windows 且需要 `uv`。认证必须由用户在本地 PowerShell 中通过隐藏
-输入完成，凭据不会进入 Codex。0.2.0 仅新增普通作业提交这一项远端写入：默认关闭，必须由用户
-本地启用、核对锁定的文件哈希预览并逐次重新确认。使用前请阅读插件 README。
+输入完成，凭据不会进入 Codex。0.3.0 仍只有普通作业提交这一项远端写入：默认关闭，必须由用户
+本地启用、核对锁定的文件哈希预览并逐次重新确认。MCP 传输不可用时，可通过独立加密会话的
+tronclass-cli 受限回退完成固定查询与单文件下载，但绝不回退提交。使用前请阅读插件 README。
 
 ### Ren'Py 图片与运行时工作流
 

@@ -27,6 +27,8 @@ Never run `login` through an agent-controlled shell. Never ask for or accept a p
 
 If login reports CAPTCHA, MFA, or an upstream-form change, stop and direct the user to the official site. Do not loop, scrape browser credentials, or weaken validation. After the user finishes login, ask them to retry `zju_auth_status`; do not claim success before checking.
 
+If the MCP cannot start, register tools, complete its handshake, or maintain its transport, route to `$zju-tronclass-fallback`. That fallback has separate `configure`, `login`, `status`, and `logout` commands and never reuses this encrypted MCP session. Do not select it for a normal `auth_required` response.
+
 ## Boundaries
 
 Authentication authorizes read-only queries and bounded official downloads. Ordinary-homework submission additionally requires the separate user-owned `zju-write-access.ps1` opt-in plus a fresh prepare/confirm/commit transaction. Authentication alone never authorizes submission, posting, attendance, progress fabrication, or raw API access.

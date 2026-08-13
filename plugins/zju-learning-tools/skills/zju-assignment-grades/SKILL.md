@@ -20,6 +20,8 @@ Do not treat “submitted” as “graded” or “graded” as “passed.” Do
 
 On `auth_required`, route to `zju-auth-session`; never request secrets. Respect rate limits. Stop and report `upstream_changed` rather than probing private endpoints.
 
+Only on MCP startup, handshake, registration, or transport failure, route a course homework list to `$zju-tronclass-fallback`. Its status/score columns are a degraded snapshot, not a replacement for assignment detail, feedback, history, or the full grade tools.
+
 ## Submission routing
 
 Do not call write tools from this Skill. When the user explicitly asks to submit their own completed and reviewed ordinary-homework files, route to `zju-assignment-submission`, which has a separate local opt-in and prepare/commit confirmation boundary.

@@ -18,6 +18,8 @@ Do not imply a transcript is complete or exact when the upstream service marks u
 
 If authentication is required, route to `zju-auth-session`; never request credentials. Respect rate limits, and report API drift instead of guessing private endpoints.
 
+tronclass-cli has no Zhiyun support. If the MCP transport is unavailable, report `fallback_unsupported`; do not substitute generic course activity output or another client.
+
 ## Hard boundaries
 
 Do not download or reconstruct classroom video, circumvent download restrictions, automate viewing, send playback heartbeats, or fabricate learning progress. Do not use raw URLs, raw HTTP, browser automation, or LAZY internals to bypass the MCP's narrow interface.

@@ -33,4 +33,6 @@ A user request that already names both the exact resources and destination count
 - Report each final absolute path, byte count, MIME type, SHA-256, warnings, and skipped conflicts.
 - On interruption or rejection, report the reason and do not claim completion.
 
+If and only if the MCP transport itself is unavailable, route one explicitly selected activity attachment to `$zju-tronclass-fallback`. The fallback cannot enumerate personal resources or perform batches; do not broaden it with direct `tcc` or raw URLs.
+
 Never open executables, macros, archives, or embedded links unless the user separately asks and the relevant safety checks pass. Do not follow non-allowlisted URLs, download classroom video, defeat copyright or download controls, or use raw HTTP/LAZY internals as a bypass.

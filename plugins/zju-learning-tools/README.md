@@ -2,7 +2,8 @@
 
 ZJU Learning Tools is a Windows-first Codex plugin for safely reading 学在浙大 and selected 智云
 data, downloading official course resources, and optionally submitting already reviewed files to
-ordinary homework. It runs locally over stdio and never sends ZJU credentials to Codex.
+ordinary homework. It runs locally over stdio and never sends ZJU credentials to Codex. A separate,
+restricted tronclass-cli fallback can continue a small read/download subset if the MCP transport is unavailable.
 
 ## Capabilities
 
@@ -14,6 +15,8 @@ ordinary homework. It runs locally over stdio and never sends ZJU credentials to
 - Query 智云 class schedules, PPT-page metadata and existing transcripts.
 - Submit reviewed files to one ordinary-homework activity through a disabled-by-default,
   prepare/confirm/commit transaction with SHA-256 locking and write-back verification.
+- Fall back to locked tronclass-cli 0.2.8 for fixed todo/course/activity/homework queries and one
+  confirmed attachment download after a real MCP startup, handshake, registration, or transport failure.
 
 The plugin cannot submit exams, quizzes, classroom exercises or questionnaires, answer roll calls,
 publish forum content, withdraw prior submissions, spoof attendance, fabricate progress, brush
@@ -21,7 +24,7 @@ videos, schedule/batch submissions, retry uncertain writes, or bypass download c
 
 ## Task-specific Skills
 
-The plugin routes requests through seven independent Skills so an agent loads only the workflow and
+The plugin routes requests through eight independent Skills so an agent loads only the workflow and
 safety rules needed for the current task:
 
 - `$zju-auth-session`: runtime diagnosis and user-owned login, status, or logout guidance.
@@ -31,6 +34,7 @@ safety rules needed for the current task:
 - `$zju-resource-downloads`: resource discovery, explicit confirmation, bounded download, and hash reporting.
 - `$zju-assessments-discussions`: read-only assessment, questionnaire, roll-call, and forum information.
 - `$zju-zhiyun-classroom`: Zhiyun class schedules, PPT metadata, and existing transcripts.
+- `$zju-tronclass-fallback`: restricted degraded reads/downloads when the MCP transport is unavailable.
 
 Authentication is a shared prerequisite, not an implicit permission expansion. Only
 `$zju-assignment-submission` can invoke the two fixed assignment-write tools; every other Skill is
@@ -59,6 +63,31 @@ browser Cookies.
 
 Check or clear the session with `status` or `logout`. If CAS adds CAPTCHA/MFA or changes its form,
 login fails closed and asks you to use the official site; it does not retry indefinitely.
+
+## MCP-unavailable tronclass fallback
+
+Use the fallback only when the MCP process cannot start, register tools, complete its handshake, or
+maintain its transport. Normal `auth_required`, rate-limit, permission, contract, or tool errors do
+not trigger it. The isolated environment is fixed to tronclass-cli 0.2.8 and Python 3.9 by
+`fallback/uv.lock`; first use can download that Python runtime and locked public packages.
+
+Configure and authenticate the separate fallback session yourself:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zju-fallback.ps1 configure
+powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zju-fallback.ps1 login
+```
+
+The wrapper disables tronclass-cli's password-keyring read/write behavior and always uses its fixed
+ZJU backend. It encrypts the CLI's otherwise unencrypted shelve session under
+`%LOCALAPPDATA%\pirate-608\zju-learning-tools\tronclass-fallback\`; the password is never stored.
+Only todos, courses, activity lists/safe metadata, homework-list fields, and one explicitly selected
+download are exposed. Terms, detailed grades/history, personal resources, assessments, discussions,
+questionnaires, roll calls, and Zhiyun return `fallback_unsupported`.
+
+The wrapper rejects arbitrary tcc arguments, API URLs, redirects, non-ZJU download hosts, unsafe
+paths, overwrites, and files over 250 MiB. It never calls `tcc homework submit`; assignment
+preparation and commit have no CLI fallback. Run `zju-fallback.ps1 logout` to remove its session.
 
 ## Assignment submission
 
@@ -115,4 +144,5 @@ command and tell me to start a new Codex task before testing zju_doctor.
 
 Plugin code is MIT licensed. The isolated `vendor/lazy-core` compatibility component is from
 [LAZY v0.2.6](https://github.com/YangShu233-Snow/Learning_at_ZJU_third_client) and remains
-LGPL-3.0-only. See `THIRD_PARTY_NOTICES.md` and `UPSTREAM.json`. LAZY's AGPL server is not included.
+LGPL-3.0-only. The optional locked fallback depends on MIT-licensed tronclass-cli 0.2.8. See
+`THIRD_PARTY_NOTICES.md` and `UPSTREAM.json`. LAZY's AGPL server is not included.

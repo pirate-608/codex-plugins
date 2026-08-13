@@ -42,4 +42,6 @@ Report the verified result, file hashes, timestamp, and request IDs. If the resu
 
 Never submit answers, exams, quizzes, questionnaires, roll calls, discussions, or fabricated progress. Never automate attendance, enumerate codes, spoof location/device identity, schedule or batch submissions, enable background retries, or bypass this transaction with raw HTTP, browser automation, LAZY internals, shell commands, or another campus client.
 
+Never fall back to tronclass-cli for preparation, upload, or commit. If the MCP startup, handshake, registration, or transport fails before commit, stop and direct the user to review and act on the official assignment page personally. If failure occurs after a write may have begun, preserve `submission_state_unknown` and do not retry through any backend.
+
 To turn the capability off, direct the user to run `zju-write-access.ps1 disable` themselves.

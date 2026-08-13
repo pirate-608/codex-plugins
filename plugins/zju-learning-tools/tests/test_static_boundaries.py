@@ -46,6 +46,7 @@ class StaticBoundaryTests(unittest.IsolatedAsyncioTestCase):
             "zju-resource-downloads",
             "zju-assessments-discussions",
             "zju-zhiyun-classroom",
+            "zju-tronclass-fallback",
         }
         actual_skills = {path.parent.name for path in skills_root.glob("*/SKILL.md")}
         self.assertEqual(actual_skills, expected_skills)
@@ -61,6 +62,17 @@ class StaticBoundaryTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(set(routed), {tool.name for tool in tools})
         self.assertTrue(all(len(owners) == 1 for owners in routed.values()), routed)
+
+    async def test_fallback_surface_excludes_remote_writes_and_arbitrary_cli(self) -> None:
+        plugin_root = Path(__file__).resolve().parents[1]
+        script = (plugin_root / "scripts" / "zju-fallback.ps1").read_text(encoding="utf-8").lower()
+        runtime = (plugin_root / "fallback" / "src" / "zju_tronclass_fallback" / "cli.py").read_text(encoding="utf-8").lower()
+        self.assertNotIn('"submit"', script)
+        self.assertNotIn('"raw"', script)
+        self.assertNotIn('"url"', script)
+        self.assertNotIn("valuefromremainingarguments", script)
+        self.assertNotIn('["homework", "submit"', runtime)
+        self.assertIn('"tronclass-cli==0.2.8"', (plugin_root / "fallback" / "pyproject.toml").read_text(encoding="utf-8"))
 
     async def test_skill_prompts_name_their_skill(self) -> None:
         skills_root = Path(__file__).resolve().parents[1] / "skills"

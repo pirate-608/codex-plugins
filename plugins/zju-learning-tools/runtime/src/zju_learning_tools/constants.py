@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 
 PLUGIN_NAME = "zju-learning-tools"
-USER_AGENT = "ZJU-Learning-Tools/0.2.0 (local Codex plugin; gated assignment submission)"
+USER_AGENT = "ZJU-Learning-Tools/0.3.0 (local Codex plugin; gated assignment submission)"
 
 COURSES_HOST = "courses.zju.edu.cn"
 AUTH_HOSTS = frozenset({"zjuam.zju.edu.cn", "identity.zju.edu.cn"})

@@ -51,6 +51,7 @@ def _course_activity_payload(client: ZJUReadClient, course_id: str) -> Any:
 def zju_doctor() -> dict[str, Any]:
     """Check Windows, uv, protected-session, and local runtime readiness without logging in."""
     status = SessionStore().status()
+    plugin_root = Path(__file__).resolve().parents[3]
     return success({
         "runtime_version": __version__,
         "platform": platform.platform(),
@@ -60,6 +61,12 @@ def zju_doctor() -> dict[str, Any]:
         "campus_network_tested": False,
         "assignment_submission": WritePolicy().status(),
         "remote_writes_available": WritePolicy().status().get("assignment_submission_enabled", False),
+        "tronclass_fallback": {
+            "configured": (plugin_root / "fallback" / "uv.lock").is_file(),
+            "backend": "tronclass-cli-0.2.8",
+            "separate_user_login_required": True,
+            "remote_writes_available": False,
+        },
     })
 
 

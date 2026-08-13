@@ -19,6 +19,8 @@ Use the smallest course or time filter available, paginate, and preserve attribu
 
 If authentication is required, route to `zju-auth-session`. On upstream drift, stop rather than probing alternate private endpoints.
 
+The tronclass fallback does not safely implement assessment, questionnaire, roll-call, or discussion queries. If the MCP transport is unavailable, report `fallback_unsupported` and direct the user to the official page; do not approximate these tasks from generic activity data.
+
 ## Hard boundaries
 
 Do not answer or submit an exam, quiz, classroom exercise, or questionnaire. Do not sign in, claim attendance, guess or enumerate codes, spoof location/device identity, or automate an official page. Do not post, edit, or delete a discussion on the user's behalf.

@@ -21,6 +21,8 @@ Start with the smallest broad query and narrow with returned IDs. Paginate rathe
 
 On `auth_required`, invoke the `zju-auth-session` workflow and let the user perform local hidden-input login. Respect `rate_limited`; on `upstream_changed`, report the unofficial contract drift and stop rather than guessing an endpoint.
 
+Only when the MCP cannot start, register tools, complete its handshake, or maintain its transport, route supported todo/course/activity-list work to `$zju-tronclass-fallback`. Do not fall back for ordinary MCP errors. Terms, detailed course records, and progress have no CLI equivalent; report them as unavailable in degraded mode.
+
 ## Produce a plan
 
 Summarize concrete dates, overdue items, blocked dependencies, and unknowns. Do not mark remote work complete or fabricate activity progress. If the request turns into assignment detail, resource download, grade review, assessment notices, or Zhiyun media, route to the corresponding specialized Skill.

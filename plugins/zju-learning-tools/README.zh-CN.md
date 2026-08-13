@@ -2,7 +2,8 @@
 
 ZJU Learning Tools 是面向 Windows Codex 的本地插件，用于安全查询“学在浙大”和部分智云
 课堂数据、下载用户有权访问的官方课程资料，并可选地把用户已经审阅的文件提交到普通作业。
-插件通过本地 stdio MCP 运行，统一认证密码不会进入 Codex 上下文。
+插件通过本地 stdio MCP 运行，统一认证密码不会进入 Codex 上下文。MCP 传输不可用时，独立且
+受限的 tronclass-cli 回退可继续少量查询和下载任务。
 
 ## 能力
 
@@ -13,13 +14,15 @@ ZJU Learning Tools 是面向 Windows Codex 的本地插件，用于安全查询�
 - 查询智云课堂日程、已有 PPT 页面元数据和转写结果。
 - 通过默认关闭的“准备—确认—提交”事务，将已审阅文件提交到一个普通作业，并锁定 SHA-256、
   逐次确认和写后核验。
+- 在确认 MCP 启动、握手、工具注册或传输故障后，用固定的 tronclass-cli 0.2.8 回退查询
+  待办/课程/活动/作业列表，或下载一个已确认附件。
 
 插件不能提交考试、测验、随堂练习或问卷，不能代签或枚举签到码、发布讨论、撤回既有提交、
 伪造位置/设备/进度、刷视频、批量/定时提交、自动重试不确定写入或绕过下载限制。
 
 ## 按任务拆分的 Skills
 
-插件包含七个相互独立的 Skill，使 Agent 只加载当前任务所需的工作流与安全约束：
+插件包含八个相互独立的 Skill，使 Agent 只加载当前任务所需的工作流与安全约束：
 
 - `$zju-auth-session`：运行环境诊断，以及由用户本人完成的登录、状态检查和登出指导。
 - `$zju-course-planning`：学期、课程、待办、活动与进度整理。
@@ -28,6 +31,7 @@ ZJU Learning Tools 是面向 Windows Codex 的本地插件，用于安全查询�
 - `$zju-resource-downloads`：资源定位、明确确认、限量下载与哈希汇总。
 - `$zju-assessments-discussions`：只读查询测验、问卷、签到通知与课程讨论。
 - `$zju-zhiyun-classroom`：智云课堂日程、PPT 元数据与已有转写。
+- `$zju-tronclass-fallback`：MCP 传输不可用时的受限降级查询与下载。
 
 认证只是各流程的共同前置条件，不会扩大权限。只有 `$zju-assignment-submission` 可以调用两个
 固定的作业写入工具，其余 Skill 对校园系统保持只读。
@@ -54,6 +58,30 @@ powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zj
 
 将参数换成 `status` 或 `logout` 可检查或清除会话。CAS 出现验证码、二次认证或表单变化时，
 登录会安全停止并提示使用官方页面，不会无限重试。
+
+## MCP 不可用时的 tronclass 回退
+
+只有 MCP 进程无法启动、无法注册工具、握手失败或传输中断时才使用回退。普通的
+`auth_required`、限流、权限、契约变化或工具错误不会触发回退。隔离环境通过
+`fallback/uv.lock` 固定为 tronclass-cli 0.2.8 与 Python 3.9；首次使用可能下载该 Python
+运行时与锁定的公开依赖。
+
+请由你本人配置并认证这套独立会话：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zju-fallback.ps1 configure
+powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zju-fallback.ps1 login
+```
+
+受限包装器会禁用 tronclass-cli 读取和保存密码的 keyring 行为，并强制使用固定 ZJU 后端。
+CLI 原本未加密的 shelve 会话会加密存放到
+`%LOCALAPPDATA%\pirate-608\zju-learning-tools\tronclass-fallback\`，密码不会保存。回退仅开放
+待办、课程、活动列表/安全元数据、作业列表字段和一个明确选择的下载；学期、详细成绩/历史、
+个人资源、测验、讨论、问卷、签到与智云均返回 `fallback_unsupported`。
+
+包装器拒绝任意 tcc 参数、API URL、重定向、非浙大下载主机、不安全路径、覆盖与超过
+250 MiB 的文件。它绝不会调用 `tcc homework submit`；作业准备和提交没有 CLI 回退。
+执行 `zju-fallback.ps1 logout` 可删除回退会话。
 
 ## 作业提交
 
@@ -103,4 +131,5 @@ zju-learning-tools，并确认本机 uv 可用。不要向我索要浙大密码�
 
 插件自有代码使用 MIT。隔离的 `vendor/lazy-core` 兼容组件来自
 [LAZY v0.2.6](https://github.com/YangShu233-Snow/Learning_at_ZJU_third_client)，继续使用
-LGPL-3.0-only。详见 `THIRD_PARTY_NOTICES.md` 和 `UPSTREAM.json`。未引入 LAZY 的 AGPL Server。
+LGPL-3.0-only。可选锁定回退依赖 MIT 许可证的 tronclass-cli 0.2.8。详见
+`THIRD_PARTY_NOTICES.md` 和 `UPSTREAM.json`。未引入 LAZY 的 AGPL Server。

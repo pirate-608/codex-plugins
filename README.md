@@ -61,7 +61,7 @@ Work autonomously and complete the setup:
 | adobe-after-effects | Adobe After Effects | After Effects composition workflows |
 | calibre-library-tools | Calibre Library Tools | Calibre library analysis and curation |
 | everything-search | Everything Search | Fast local Windows file and folder discovery through voidtools ES |
-| zju-learning-tools | ZJU Learning Tools | ZJU course queries, controlled downloads, and opt-in confirmed homework submission |
+| zju-learning-tools | ZJU Learning Tools | ZJU queries, a restricted CLI fallback, controlled downloads, and confirmed homework submission |
 
 ## Requirements
 
@@ -74,9 +74,11 @@ running plus `es.exe` on PATH (or configured through `EVERYTHING_ES_PATH`). The 
 bundle or automatically start either executable.
 
 ZJU Learning Tools is Windows-first and requires `uv`. Authentication is performed by the user in
-a local hidden-input PowerShell flow; credentials never enter Codex. Version 0.2.0 adds only one
+a local hidden-input PowerShell flow; credentials never enter Codex. Version 0.3.0 retains only one
 remote write: an ordinary-homework submission transaction that is disabled by default and requires
-local opt-in, a locked file-hash preview, and fresh per-attempt confirmation. See its plugin README.
+local opt-in, a locked file-hash preview, and fresh per-attempt confirmation. If the MCP transport
+is unavailable, a separate encrypted tronclass-cli fallback covers only fixed reads and one-file
+downloads; it never falls back for submissions. See its plugin README.
 
 ### Ren'Py image and runtime workflow
 

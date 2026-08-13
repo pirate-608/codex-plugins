@@ -15,7 +15,7 @@ license terms remain with their respective authors and upstream projects.
 | Adobe After Effects | <https://github.com/JUNKDOGE-JOE/after-effects-mcp> | MIT |
 | Calibre Library Tools | <https://www.npmjs.com/package/calibre-mcp> | See the upstream package |
 | Everything Search | <https://github.com/voidtools/ES> | Plugin wrapper is MIT; ES is MIT and is not bundled; Everything is user-installed |
-| ZJU Learning Tools | <https://github.com/YangShu233-Snow/Learning_at_ZJU_third_client> | Plugin runtime is MIT; isolated LAZY v0.2.6 RSA compatibility source remains LGPL-3.0-only; LAZY Server is not bundled |
+| ZJU Learning Tools | <https://github.com/YangShu233-Snow/Learning_at_ZJU_third_client>; fallback <https://github.com/zhou-haoyang/tronclass-cli> | Plugin runtime is MIT; isolated LAZY v0.2.6 RSA compatibility source remains LGPL-3.0-only; optional locked tronclass-cli 0.2.8 fallback is MIT; LAZY Server is not bundled |
 
 Adobe, AutoCAD, Calibre, Everything, LaTeX, Ren'Py, SolidWorks, Unity, ZJU, and other product names are trademarks
 of their respective owners. This repository does not bundle the corresponding commercial desktop

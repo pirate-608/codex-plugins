@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZJU Tronclass Fallback"
+  short_description: "Recover safe ZJU reads when MCP is unavailable"
+  default_prompt: "Use $zju-tronclass-fallback to continue this supported ZJU read task after confirming the MCP transport is unavailable."
