@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZJU Resource Downloads"
+  short_description: "Find and safely download official ZJU course resources."
+  default_prompt: "Use $zju-resource-downloads to find ZJU course files, confirm my selection, and download them safely."

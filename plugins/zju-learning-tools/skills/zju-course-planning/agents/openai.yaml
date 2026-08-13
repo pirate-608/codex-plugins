@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZJU Course Planning"
+  short_description: "Review ZJU courses, todos, activities, and progress."
+  default_prompt: "Use $zju-course-planning to review my ZJU courses, todos, activities, and progress."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZJU Assessments and Discussions"
+  short_description: "Read ZJU assessment notices and course discussions."
+  default_prompt: "Use $zju-assessments-discussions to review assessment notices and discussions without answering or posting."

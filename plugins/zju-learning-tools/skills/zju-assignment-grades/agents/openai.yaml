@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZJU Assignments and Grades"
+  short_description: "Review ZJU assignments, deadlines, and grades safely."
+  default_prompt: "Use $zju-assignment-grades to summarize my assignments and grades without submitting anything."

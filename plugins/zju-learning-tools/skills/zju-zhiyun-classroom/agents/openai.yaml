@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZJU Zhiyun Classroom"
+  short_description: "Review Zhiyun classes, PPT metadata, and transcripts."
+  default_prompt: "Use $zju-zhiyun-classroom to inspect my Zhiyun classes, PPT metadata, and existing transcripts."

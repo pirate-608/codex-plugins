@@ -2,7 +2,7 @@
 
 English | [简体中文](README.zh-CN.md)
 
-A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, Calibre, and Windows file-search workflows.
+A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, Calibre, Windows file search, and read-only ZJU learning workflows.
 
 ## Add the marketplace
 
@@ -61,6 +61,7 @@ Work autonomously and complete the setup:
 | adobe-after-effects | Adobe After Effects | After Effects composition workflows |
 | calibre-library-tools | Calibre Library Tools | Calibre library analysis and curation |
 | everything-search | Everything Search | Fast local Windows file and folder discovery through voidtools ES |
+| zju-learning-tools | ZJU Learning Tools | Read-only ZJU course queries and controlled official-resource downloads |
 
 ## Requirements
 
@@ -71,6 +72,10 @@ PowerShell on PATH. Commercial desktop applications and user credentials are not
 Everything Search is Windows-only and requires the user-installed Everything application to be
 running plus `es.exe` on PATH (or configured through `EVERYTHING_ES_PATH`). The plugin does not
 bundle or automatically start either executable.
+
+ZJU Learning Tools is Windows-first and requires `uv`. Authentication is performed by the user in
+a local hidden-input PowerShell flow; credentials never enter Codex, and the plugin exposes no
+campus-side write actions. See its plugin README before use.
 
 ### Ren'Py image and runtime workflow
 

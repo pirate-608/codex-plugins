@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "runtime_component": {
+    "name": "LAZY (Learning at ZJU yes!)",
+    "repository": "https://github.com/YangShu233-Snow/Learning_at_ZJU_third_client",
+    "version": "0.2.6",
+    "commit": "bc403fabd8bde0163fc75aa299ac3e1b24d0c3f3",
+    "license": "LGPL-3.0-only",
+    "included": ["src/lazy/core/encrypt/LoginRSA.py"],
+    "excluded": ["src/lazy/server", "src/lazy/CLI", "src/lazy/GUI", "generic write-capable API configuration"],
+    "upstream_file_sha256": "fda24cbe73dffd09200406c8bd2aabf3f03a80139e439e74570d4a7c878f31e0",
+    "packaged_file_sha256": "034655e10d195aee26a4215a820a415423efd0ed88633a196229deab9db8fef7",
+    "upstream_license_sha256": "ba2ac7c9976a9594d55ea1f39f665f4e6ed71e5abe0225db8f870523a758c330",
+    "packaged_license_sha256": "5c6ac0e3aeeb7af7db4e19b7aa9d61069af1d25cd74593ffa13fb66bf6c9995a",
+    "modifications": "LoginRSA.py and LICENSE line endings were normalized from CRLF to LF; logic and text are otherwise unchanged. Package placement and an __init__.py were added for isolated importing."
+  },
+  "design_references_not_copied": [
+    {"name": "ZJU Learning Assistant", "url": "https://github.com/PeiPei233/zju-learning-assistant", "license": "MIT"},
+    {"name": "tronclass-cli", "url": "https://github.com/zhou-haoyang/tronclass-cli", "license": "MIT"},
+    {"name": "fiz", "url": "https://github.com/CrazySpottedDove/fiz", "license": "NOASSERTION"},
+    {"name": "ZJU-live-better", "url": "https://github.com/5dbwat4/ZJU-live-better", "license": "GPL-3.0-only"},
+    {"name": "vibe-learning-in-zju", "url": "https://github.com/EviterLesRoses2/vibe-learning-in-zju", "license": "NOASSERTION"}
+  ]
+}
