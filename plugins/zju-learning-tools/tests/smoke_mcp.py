@@ -1,4 +1,4 @@
-"""Start the bundled stdio MCP and verify its read-only tool surface."""
+"""Start the bundled stdio MCP and verify its narrow read/download/assignment-submit surface."""
 
 from __future__ import annotations
 
@@ -26,12 +26,15 @@ async def run() -> dict[str, object]:
             await session.initialize()
             tools = await session.list_tools()
             names = sorted(tool.name for tool in tools.tools)
-            if len(names) != 23:
-                raise RuntimeError(f"Expected 23 tools, got {len(names)}")
-            forbidden = ("submit", "answer", "signin", "post", "upload", "delete", "remove", "complete")
+            if len(names) != 25:
+                raise RuntimeError(f"Expected 25 tools, got {len(names)}")
+            allowed_writes = {"zju_prepare_assignment_submission", "zju_commit_assignment_submission"}
+            forbidden = ("answer", "signin", "post_discussion", "exam_submit", "quiz_submit", "delete", "remove", "complete")
             bad = [name for name in names if any(word in name for word in forbidden)]
             if bad:
                 raise RuntimeError(f"Remote-write-like tools were exposed: {bad}")
+            if {name for name in names if "submission" in name} != allowed_writes:
+                raise RuntimeError("The assignment submission surface is not the exact two-phase transaction.")
             doctor = await session.call_tool("zju_doctor", {})
             return {"ok": not doctor.isError, "tool_count": len(names), "tools": names}
 

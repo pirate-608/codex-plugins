@@ -2,7 +2,7 @@
 
 English | [简体中文](README.zh-CN.md)
 
-A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, Calibre, Windows file search, and read-only ZJU learning workflows.
+A public Codex plugin marketplace for Unity, CAD, Adobe, LaTeX, Ren'Py, Calibre, Windows file search, and safety-gated ZJU learning workflows.
 
 ## Add the marketplace
 
@@ -61,7 +61,7 @@ Work autonomously and complete the setup:
 | adobe-after-effects | Adobe After Effects | After Effects composition workflows |
 | calibre-library-tools | Calibre Library Tools | Calibre library analysis and curation |
 | everything-search | Everything Search | Fast local Windows file and folder discovery through voidtools ES |
-| zju-learning-tools | ZJU Learning Tools | Read-only ZJU course queries and controlled official-resource downloads |
+| zju-learning-tools | ZJU Learning Tools | ZJU course queries, controlled downloads, and opt-in confirmed homework submission |
 
 ## Requirements
 
@@ -74,8 +74,9 @@ running plus `es.exe` on PATH (or configured through `EVERYTHING_ES_PATH`). The 
 bundle or automatically start either executable.
 
 ZJU Learning Tools is Windows-first and requires `uv`. Authentication is performed by the user in
-a local hidden-input PowerShell flow; credentials never enter Codex, and the plugin exposes no
-campus-side write actions. See its plugin README before use.
+a local hidden-input PowerShell flow; credentials never enter Codex. Version 0.2.0 adds only one
+remote write: an ordinary-homework submission transaction that is disabled by default and requires
+local opt-in, a locked file-hash preview, and fresh per-attempt confirmation. See its plugin README.
 
 ### Ren'Py image and runtime workflow
 

@@ -10,7 +10,7 @@ import unicodedata
 from urllib.parse import urlparse
 
 from .constants import ALLOWED_HOSTS
-from .errors import DownloadRejected, ZJUError
+from .errors import DownloadRejected, SubmissionRejected, ZJUError
 
 SECRET_KEY_PARTS = (
     "password", "passwd", "cookie", "authorization", "bearer", "csrf", "ticket",
@@ -157,3 +157,53 @@ def safe_destination(root: str, filename: str) -> tuple[Path, Path]:
     if os.path.commonpath([str(resolved_root), str(candidate.resolve(strict=False))]) != str(resolved_root):
         raise DownloadRejected("The resolved destination escaped the selected root.")
     return resolved_root, candidate
+
+
+def _reject_reparse_components(path: Path, *, label: str) -> None:
+    current = Path(path.anchor)
+    for part in path.parts[1:]:
+        current = current / part
+        try:
+            stats = current.lstat()
+        except OSError as exc:
+            raise SubmissionRejected(f"The {label} could not be inspected safely.") from exc
+        attrs = getattr(stats, "st_file_attributes", 0)
+        if current.is_symlink() or attrs & 0x400:
+            raise SubmissionRejected(f"The {label} contains a symbolic link or reparse point.")
+
+
+def safe_upload_root(value: str) -> Path:
+    root = Path(value).expanduser()
+    if not root.is_absolute() or not root.is_dir() or str(root).startswith(("\\\\", "//")):
+        raise SubmissionRejected("Each approved upload root must be an existing absolute local directory.")
+    _reject_reparse_components(root.absolute(), label="approved upload root")
+    resolved = root.resolve(strict=True)
+    _reject_reparse_components(resolved, label="approved upload root")
+    return resolved
+
+
+def safe_submission_file(value: str, approved_roots: list[str]) -> Path:
+    candidate = Path(value).expanduser()
+    if not candidate.is_absolute() or not candidate.is_file() or str(candidate).startswith(("\\\\", "//")):
+        raise SubmissionRejected("Each submission path must name one existing absolute local file.")
+    _reject_reparse_components(candidate.absolute(), label="submission file path")
+    resolved = candidate.resolve(strict=True)
+    _reject_reparse_components(resolved, label="submission file path")
+    safe_remote_filename(resolved.name)
+    attrs = getattr(resolved.stat(), "st_file_attributes", 0)
+    if attrs & 0x2:
+        raise SubmissionRejected("Hidden files cannot be submitted through the plugin.")
+    roots = [safe_upload_root(root) for root in approved_roots]
+    if not roots:
+        raise SubmissionRejected("No approved upload root is configured.", code="write_capability_disabled")
+    within_root = False
+    for root in roots:
+        try:
+            if os.path.commonpath([str(root), str(resolved)]) == str(root):
+                within_root = True
+                break
+        except ValueError:
+            continue
+    if not within_root:
+        raise SubmissionRejected("The file is outside the user-approved upload roots.")
+    return resolved

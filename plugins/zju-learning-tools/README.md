@@ -1,8 +1,8 @@
 # ZJU Learning Tools
 
 ZJU Learning Tools is a Windows-first Codex plugin for safely reading 学在浙大 and selected 智云
-data and downloading official course resources. It runs locally over stdio. The plugin never sends
-your ZJU credentials to Codex and exposes no campus-side write tools.
+data, downloading official course resources, and optionally submitting already reviewed files to
+ordinary homework. It runs locally over stdio and never sends ZJU credentials to Codex.
 
 ## Capabilities
 
@@ -12,24 +12,29 @@ your ZJU credentials to Codex and exposes no campus-side write tools.
 - List personal/course resources and download explicitly selected uploads with size/path controls
   and SHA-256 verification.
 - Query 智云 class schedules, PPT-page metadata and existing transcripts.
+- Submit reviewed files to one ordinary-homework activity through a disabled-by-default,
+  prepare/confirm/commit transaction with SHA-256 locking and write-back verification.
 
-The plugin cannot submit homework or exams, answer questionnaires or roll calls, publish forum
-content, spoof attendance, fabricate progress, brush videos, or bypass download controls.
+The plugin cannot submit exams, quizzes, classroom exercises or questionnaires, answer roll calls,
+publish forum content, withdraw prior submissions, spoof attendance, fabricate progress, brush
+videos, schedule/batch submissions, retry uncertain writes, or bypass download controls.
 
 ## Task-specific Skills
 
-The plugin routes requests through six independent Skills so an agent loads only the workflow and
+The plugin routes requests through seven independent Skills so an agent loads only the workflow and
 safety rules needed for the current task:
 
 - `$zju-auth-session`: runtime diagnosis and user-owned login, status, or logout guidance.
 - `$zju-course-planning`: terms, courses, todos, activities, and progress summaries.
 - `$zju-assignment-grades`: assignment deadlines, submission history, feedback, and grades.
+- `$zju-assignment-submission`: gated preparation and one-time submission of reviewed homework files.
 - `$zju-resource-downloads`: resource discovery, explicit confirmation, bounded download, and hash reporting.
 - `$zju-assessments-discussions`: read-only assessment, questionnaire, roll-call, and forum information.
 - `$zju-zhiyun-classroom`: Zhiyun class schedules, PPT metadata, and existing transcripts.
 
-Authentication is a shared prerequisite, not an implicit permission expansion. Each data Skill
-routes `auth_required` to `$zju-auth-session`; none can perform a remote write.
+Authentication is a shared prerequisite, not an implicit permission expansion. Only
+`$zju-assignment-submission` can invoke the two fixed assignment-write tools; every other Skill is
+read-only with respect to campus systems.
 
 ## Requirements and installation
 
@@ -55,6 +60,35 @@ browser Cookies.
 Check or clear the session with `status` or `logout`. If CAS adds CAPTCHA/MFA or changes its form,
 login fails closed and asks you to use the official site; it does not retry indefinitely.
 
+## Assignment submission
+
+Assignment submission is disabled after installation. To authorize files from one or more local
+directories, run this yourself in an interactive PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zju-write-access.ps1 enable -Root D:\path\to\reviewed-homework
+```
+
+The script displays the exact scope and requires typing `ENABLE ASSIGNMENT SUBMISSION`. It writes a
+local policy under `%LOCALAPPDATA%\pirate-608\zju-learning-tools\`; it does not store a password.
+Use `status` to inspect the policy or `disable` to remove it.
+
+Each attempt is two phase:
+
+1. `zju_prepare_assignment_submission` re-reads the assignment and personal submission history,
+   validates the deadline and ordinary-homework type, hashes every explicit file, and returns a
+   120-second preview. It performs no remote write.
+2. After the user reviews account suffix, assignment, prior attempts, file paths/sizes/SHA-256,
+   comment, deadline, and payload hash, a separate explicit confirmation permits exactly one
+   `zju_commit_assignment_submission` call.
+3. Commit revalidates the account, capability, assignment revision, deadline, paths, sizes, and
+   hashes; uploads files; submits once; then reads submission history back for verification.
+
+Approvals are process-local, expire, and cannot be reused. A local atomic ledger blocks identical
+duplicates across restarts. If a timeout or ambiguous failure occurs after a write may have begun,
+the result is `submission_state_unknown`: inspect the official page and do not retry automatically.
+The plugin never turns generated work directly into a submission within the same autonomous flow.
+
 ## Download behavior
 
 The agent must first list resources and receive confirmation of exact upload IDs, filenames, and an
@@ -63,7 +97,8 @@ are written atomically, and are limited to 250 MiB each, 50 files per batch, and
 Remote filenames and redirects are restricted to prevent path traversal and credential leakage.
 
 Campus APIs used here are unofficial and can change. CI uses only mock servers and sanitized
-fixtures; no production campus write test exists.
+fixtures; no production campus write test exists. Real submission should first be tried by the user
+with a small, non-critical ordinary-homework attachment after reviewing the official page.
 
 ## Configure this marketplace with an AI
 

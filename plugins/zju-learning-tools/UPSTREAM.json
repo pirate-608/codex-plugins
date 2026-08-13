@@ -7,7 +7,7 @@
     "commit": "bc403fabd8bde0163fc75aa299ac3e1b24d0c3f3",
     "license": "LGPL-3.0-only",
     "included": ["src/lazy/core/encrypt/LoginRSA.py"],
-    "excluded": ["src/lazy/server", "src/lazy/CLI", "src/lazy/GUI", "generic write-capable API configuration"],
+    "excluded": ["src/lazy/server", "src/lazy/CLI", "src/lazy/GUI", "generic write-capable API configuration", "assignment submission implementation"],
     "upstream_file_sha256": "fda24cbe73dffd09200406c8bd2aabf3f03a80139e439e74570d4a7c878f31e0",
     "packaged_file_sha256": "034655e10d195aee26a4215a820a415423efd0ed88633a196229deab9db8fef7",
     "upstream_license_sha256": "ba2ac7c9976a9594d55ea1f39f665f4e6ed71e5abe0225db8f870523a758c330",
@@ -16,7 +16,7 @@
   },
   "design_references_not_copied": [
     {"name": "ZJU Learning Assistant", "url": "https://github.com/PeiPei233/zju-learning-assistant", "license": "MIT"},
-    {"name": "tronclass-cli", "url": "https://github.com/zhou-haoyang/tronclass-cli", "license": "MIT"},
+    {"name": "tronclass-cli", "url": "https://github.com/zhou-haoyang/tronclass-cli", "license": "MIT", "used_for": "assignment upload and submission API behavior reference; no code copied"},
     {"name": "fiz", "url": "https://github.com/CrazySpottedDove/fiz", "license": "NOASSERTION"},
     {"name": "ZJU-live-better", "url": "https://github.com/5dbwat4/ZJU-live-better", "license": "GPL-3.0-only"},
     {"name": "vibe-learning-in-zju", "url": "https://github.com/EviterLesRoses2/vibe-learning-in-zju", "license": "NOASSERTION"}

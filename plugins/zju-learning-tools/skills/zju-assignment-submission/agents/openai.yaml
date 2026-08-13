@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZJU Assignment Submission"
+  short_description: "Submit reviewed ZJU homework with transaction confirmation."
+  default_prompt: "Use $zju-assignment-submission to prepare my reviewed homework files, show the locked preview, and wait for my explicit confirmation before one-time submission."

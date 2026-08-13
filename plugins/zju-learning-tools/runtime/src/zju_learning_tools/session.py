@@ -20,6 +20,28 @@ def _rfc3339(value: datetime) -> str:
     return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def harden_private_file(path: Path) -> None:
+    if os.name != "nt":
+        return
+    domain = os.environ.get("USERDOMAIN", "").strip()
+    username = os.environ.get("USERNAME", "").strip() or getpass.getuser()
+    principal = f"{domain}\\{username}" if domain else username
+    try:
+        result = subprocess.run(
+            ["icacls.exe", str(path), "/inheritance:r", "/grant:r", f"{principal}:(F)"],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            check=False,
+            timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise ZJUError("session_storage_failed", "Windows could not secure a private ZJU state file.") from exc
+    if result.returncode != 0:
+        raise ZJUError("session_storage_failed", "Windows could not restrict access to a private ZJU state file.")
+
+
 class SessionStore:
     @staticmethod
     def _cookie_service(domain: str) -> str:
@@ -32,25 +54,7 @@ class SessionStore:
 
     @staticmethod
     def _harden_acl(path: Path) -> None:
-        if os.name != "nt":
-            return
-        domain = os.environ.get("USERDOMAIN", "").strip()
-        username = os.environ.get("USERNAME", "").strip() or getpass.getuser()
-        principal = f"{domain}\\{username}" if domain else username
-        try:
-            result = subprocess.run(
-                ["icacls.exe", str(path), "/inheritance:r", "/grant:r", f"{principal}:(F)"],
-                stdin=subprocess.DEVNULL,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
-                check=False,
-                timeout=10,
-            )
-        except (OSError, subprocess.SubprocessError) as exc:
-            raise ZJUError("session_storage_failed", "Windows could not secure the encrypted session file.") from exc
-        if result.returncode != 0:
-            raise ZJUError("session_storage_failed", "Windows could not restrict access to the encrypted session file.")
+        harden_private_file(path)
 
     def _key(self, *, create: bool) -> bytes:
         encoded = keyring.get_password(KEYRING_SERVICE, KEYRING_SESSION_KEY)

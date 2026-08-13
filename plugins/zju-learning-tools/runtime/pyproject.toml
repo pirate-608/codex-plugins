@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "zju-learning-tools-runtime"
-version = "0.1.0"
-description = "Read-only local MCP runtime for ZJU Learning Tools"
+version = "0.2.0"
+description = "Local ZJU Learning Tools MCP with gated assignment submission"
 requires-python = ">=3.11,<3.14"
 license = { text = "MIT" }
 dependencies = [

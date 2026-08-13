@@ -1,7 +1,7 @@
 {
   "name": "zju-learning-tools",
-  "version": "0.1.0",
-  "description": "Safely query ZJU learning services and download official course resources through a local read-only MCP server.",
+  "version": "0.2.0",
+  "description": "Safely query ZJU learning services, download official resources, and submit reviewed ordinary-homework files through an opt-in two-phase transaction.",
   "author": {
     "name": "pirate-608",
     "url": "https://github.com/pirate-608"
@@ -15,27 +15,30 @@
     "courses",
     "learning",
     "downloads",
+    "assignments",
     "mcp"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "ZJU Learning Tools",
-    "shortDescription": "Query ZJU courses and download official resources.",
-    "longDescription": "Use six focused workflows for authentication, course planning, assignments and grades, assessment notices and discussions, official resource downloads, and Zhiyun classroom data through a local read-only MCP. Credentials never enter the agent context, and campus-side write actions are not exposed.",
+    "shortDescription": "Query ZJU courses and safely submit reviewed homework.",
+    "longDescription": "Use seven focused workflows for authentication, course planning, assignments and grades, separately confirmed ordinary-homework submission, assessment notices and discussions, official resource downloads, and Zhiyun classroom data. Credentials never enter the agent context; all other campus-side writes remain unavailable.",
     "developerName": "pirate-608",
     "category": "Productivity",
     "capabilities": [
       "Interactive",
       "Search",
       "Read",
-      "Local Downloads"
+      "Local Downloads",
+      "Confirmed Assignment Submission"
     ],
     "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/zju-learning-tools",
     "defaultPrompt": [
       "Review my current ZJU courses and upcoming todos.",
       "Find resources for this ZJU course and let me choose what to download.",
       "Summarize my assignment status without submitting anything.",
+      "Prepare these reviewed homework files and show me the locked preview before asking for confirmation.",
       "Check whether my private ZJU session is ready."
     ],
     "brandColor": "#2563EB",

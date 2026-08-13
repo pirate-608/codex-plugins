@@ -3,25 +3,37 @@ from __future__ import annotations
 from pathlib import Path
 import unittest
 
-from zju_learning_tools.constants import READ_METHODS
+from zju_learning_tools.constants import ASSIGNMENT_WRITE_METHODS, READ_METHODS
 from zju_learning_tools.server import mcp
 
 
 class StaticBoundaryTests(unittest.IsolatedAsyncioTestCase):
-    async def test_tool_surface_contains_no_remote_write_action(self) -> None:
+    async def test_tool_surface_contains_only_transactional_assignment_writes(self) -> None:
         tools = await mcp.list_tools()
         names = {tool.name for tool in tools}
-        self.assertEqual(len(names), 23)
+        self.assertEqual(len(names), 25)
         self.assertIn("zju_download_resource", names)
-        for forbidden in ("submit", "answer", "signin", "sign_in", "post", "upload", "delete", "remove", "complete"):
+        self.assertEqual(
+            {name for name in names if "submission" in name},
+            {"zju_prepare_assignment_submission", "zju_commit_assignment_submission"},
+        )
+        for forbidden in ("exam_submit", "quiz_submit", "answer", "signin", "sign_in", "post_discussion", "delete", "remove", "complete"):
             self.assertFalse(any(forbidden in name for name in names), (forbidden, sorted(names)))
 
     async def test_tool_schemas_do_not_accept_urls_or_credentials(self) -> None:
         tools = await mcp.list_tools()
+        by_name = {tool.name: tool for tool in tools}
         serialized = "\n".join(str(tool.inputSchema).lower() for tool in tools)
         for forbidden in ("password", "cookie", "authorization", "raw_url", "endpoint"):
             self.assertNotIn(forbidden, serialized)
         self.assertEqual(READ_METHODS, frozenset({"GET", "HEAD"}))
+        self.assertEqual(ASSIGNMENT_WRITE_METHODS, frozenset({"POST", "PUT"}))
+        prepare = by_name["zju_prepare_assignment_submission"].annotations
+        commit = by_name["zju_commit_assignment_submission"].annotations
+        self.assertTrue(prepare.readOnlyHint)
+        self.assertFalse(commit.readOnlyHint)
+        self.assertTrue(commit.destructiveHint)
+        self.assertFalse(commit.idempotentHint)
 
     async def test_tools_are_partitioned_across_task_specific_skills(self) -> None:
         plugin_root = Path(__file__).resolve().parents[1]
@@ -30,6 +42,7 @@ class StaticBoundaryTests(unittest.IsolatedAsyncioTestCase):
             "zju-auth-session",
             "zju-course-planning",
             "zju-assignment-grades",
+            "zju-assignment-submission",
             "zju-resource-downloads",
             "zju-assessments-discussions",
             "zju-zhiyun-classroom",

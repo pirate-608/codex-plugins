@@ -1,8 +1,8 @@
 # ZJU Learning Tools
 
 ZJU Learning Tools 是面向 Windows Codex 的本地插件，用于安全查询“学在浙大”和部分智云
-课堂数据，并下载用户有权访问的官方课程资料。插件通过本地 stdio MCP 运行，统一认证密码
-不会进入 Codex 上下文，也不提供任何校园系统远端写入工具。
+课堂数据、下载用户有权访问的官方课程资料，并可选地把用户已经审阅的文件提交到普通作业。
+插件通过本地 stdio MCP 运行，统一认证密码不会进入 Codex 上下文。
 
 ## 能力
 
@@ -11,23 +11,26 @@ ZJU Learning Tools 是面向 Windows Codex 的本地插件，用于安全查询�
 - 只读查看问卷、签到通知和讨论，不答题、不签到、不发帖。
 - 列出课程/个人资源，按用户明确选择下载，并校验路径、大小和 SHA-256。
 - 查询智云课堂日程、已有 PPT 页面元数据和转写结果。
+- 通过默认关闭的“准备—确认—提交”事务，将已审阅文件提交到一个普通作业，并锁定 SHA-256、
+  逐次确认和写后核验。
 
-插件不能提交作业或考试、填写问卷、代签或枚举签到码、发布讨论、伪造位置/设备/进度、
-刷视频或绕过下载限制。
+插件不能提交考试、测验、随堂练习或问卷，不能代签或枚举签到码、发布讨论、撤回既有提交、
+伪造位置/设备/进度、刷视频、批量/定时提交、自动重试不确定写入或绕过下载限制。
 
 ## 按任务拆分的 Skills
 
-插件包含六个相互独立的 Skill，使 Agent 只加载当前任务所需的工作流与安全约束：
+插件包含七个相互独立的 Skill，使 Agent 只加载当前任务所需的工作流与安全约束：
 
 - `$zju-auth-session`：运行环境诊断，以及由用户本人完成的登录、状态检查和登出指导。
 - `$zju-course-planning`：学期、课程、待办、活动与进度整理。
 - `$zju-assignment-grades`：作业截止时间、本人提交历史、反馈与成绩查询。
+- `$zju-assignment-submission`：受控准备并一次性提交用户已审阅的普通作业文件。
 - `$zju-resource-downloads`：资源定位、明确确认、限量下载与哈希汇总。
 - `$zju-assessments-discussions`：只读查询测验、问卷、签到通知与课程讨论。
 - `$zju-zhiyun-classroom`：智云课堂日程、PPT 元数据与已有转写。
 
-认证只是各查询流程的共同前置条件，不会扩大权限。数据 Skill 遇到 `auth_required` 时会转到
-`$zju-auth-session`，所有 Skill 都不能执行远端写入。
+认证只是各流程的共同前置条件，不会扩大权限。只有 `$zju-assignment-submission` 可以调用两个
+固定的作业写入工具，其余 Skill 对校园系统保持只读。
 
 ## 要求与安装
 
@@ -52,6 +55,31 @@ powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zj
 将参数换成 `status` 或 `logout` 可检查或清除会话。CAS 出现验证码、二次认证或表单变化时，
 登录会安全停止并提示使用官方页面，不会无限重试。
 
+## 作业提交
+
+安装后作业提交默认关闭。请在你本人打开的交互式 PowerShell 中授权一个或多个本地目录：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\plugins\zju-learning-tools\scripts\zju-write-access.ps1 enable -Root D:\path\to\reviewed-homework
+```
+
+脚本会显示权限范围，并要求手动输入 `ENABLE ASSIGNMENT SUBMISSION`。策略保存在
+`%LOCALAPPDATA%\pirate-608\zju-learning-tools\`，不保存密码。使用 `status` 检查，或用
+`disable` 关闭。
+
+每次提交分为两个阶段：
+
+1. `zju_prepare_assignment_submission` 重新读取作业与本人提交历史，核验普通作业类型和截止时间，
+   对每个明确文件计算 SHA-256，并返回 120 秒有效的预览；这一步不执行远端写入。
+2. 用户核对账号尾号、作业、既有提交次数、文件路径/大小/SHA-256、评论、截止时间和 payload
+   哈希后，必须重新明确确认，才允许调用一次 `zju_commit_assignment_submission`。
+3. commit 再次核验账号、权限、作业版本、截止时间、路径、大小和哈希，随后上传、提交一次，
+   再读取提交历史确认结果。
+
+Approval 仅在当前 MCP 进程有效、会过期且不能复用；本地原子 ledger 会跨重启阻止完全相同的
+重复提交。写入开始后发生超时或结果不明确时返回 `submission_state_unknown`，必须到官方页面
+检查，禁止自动重试。插件不会在同一自主流程中把刚生成的作业直接提交。
+
 ## 下载规则
 
 Agent 必须先列出资源，并得到用户对上传 ID、文件名和现有绝对目标目录的明确确认。默认不覆盖
@@ -59,7 +87,7 @@ Agent 必须先列出资源，并得到用户对上传 ID、文件名和现有�
 250 MiB、每批 50 个、每批总计 1 GiB，并阻止路径穿越、UNC、ADS、重解析点和非白名单重定向。
 
 校园 API 没有公开契约，可能随时变化。CI 仅使用 Mock 服务与脱敏 fixture，不会对生产校园
-域名执行写测试。
+域名执行写测试。首次真实提交应由用户选择低风险、体积小的普通作业附件，并同时核对官方页面。
 
 ## 让 AI 自动配置插件市场
 

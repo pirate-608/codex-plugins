@@ -1,6 +1,6 @@
 ---
 name: zju-assignment-grades
-description: Read ZJU assignment metadata, deadlines, personal submission history, grading status, feedback, and grades through the local read-only MCP. Use when the user asks what homework is due, whether an assignment was submitted, what was graded, or for a personal grade summary. Never submit, withdraw, upload, edit, or answer coursework.
+description: Read ZJU assignment metadata, deadlines, personal submission history, grading status, feedback, and grades through the local MCP. Use when the user asks what homework is due, whether an assignment was submitted, what was graded, or for a personal grade summary. This Skill remains read-only; route an explicit request to submit completed homework files to zju-assignment-submission.
 ---
 
 # ZJU Assignment Grades
@@ -20,8 +20,8 @@ Do not treat “submitted” as “graded” or “graded” as “passed.” Do
 
 On `auth_required`, route to `zju-auth-session`; never request secrets. Respect rate limits. Stop and report `upstream_changed` rather than probing private endpoints.
 
-## Hard boundary
+## Submission routing
 
-The plugin intentionally exposes no homework write tools. Never upload or submit files, create attempts, withdraw submissions, answer questions, or bypass the boundary with browser automation, raw HTTP, shell commands, LAZY internals, or another installed application.
+Do not call write tools from this Skill. When the user explicitly asks to submit their own completed and reviewed ordinary-homework files, route to `zju-assignment-submission`, which has a separate local opt-in and prepare/commit confirmation boundary.
 
-You may help organize or draft work locally. For final submission, show the official page returned by the read tool and require the user to review and act there personally.
+Never submit exams, quizzes, questionnaires, attendance, discussions, generated-and-immediately-submitted work, or fabricated progress. Do not withdraw or edit prior submissions, and do not bypass the specialized transaction with browser automation, raw HTTP, shell commands, LAZY internals, or another campus application.
