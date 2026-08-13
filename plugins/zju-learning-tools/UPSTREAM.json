@@ -28,6 +28,7 @@
   },
   "design_references_not_copied": [
     {"name": "ZJU Learning Assistant", "url": "https://github.com/PeiPei233/zju-learning-assistant", "license": "MIT"},
+    {"name": "tronclass-cli-ts", "url": "https://github.com/YuJun-BO2/tronclass-cli-ts", "version": "0.4.1", "commit": "9d817c544fd6110d9bc4a616abaff6ef71f7a1e5", "license": "Apache-2.0"},
     {"name": "fiz", "url": "https://github.com/CrazySpottedDove/fiz", "license": "NOASSERTION"},
     {"name": "ZJU-live-better", "url": "https://github.com/5dbwat4/ZJU-live-better", "license": "GPL-3.0-only"},
     {"name": "vibe-learning-in-zju", "url": "https://github.com/EviterLesRoses2/vibe-learning-in-zju", "license": "NOASSERTION"}

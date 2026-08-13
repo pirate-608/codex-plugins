@@ -1,7 +1,6 @@
 ---
 name: autocad-automation
 description: "AutoCAD 自动化技能。用于让 Codex/Claude 在 Windows 上通过 Python COM/ActiveX 直连本机 AutoCAD 进行二维绘图、图层/文字/标注/块处理、DWG/DXF/PDF 导出、批量修改、工程图自检，以及在 COM 不足时切换到 AutoLISP/SCR 或 AutoCAD .NET 插件路线；当用户提到 AutoCAD、CAD、DWG、DXF、画图、出图、图层、标注、块、批量改图、AutoLISP、ObjectARX、.NET 插件、Codex 接入 CAD 软件时都应优先使用。"
-metadata: { "os": ["win32"], "requires": { "anyBins": ["python", "py"], "pythonPackages": ["pywin32"] } }
 ---
 
 # AutoCAD 自动化技能

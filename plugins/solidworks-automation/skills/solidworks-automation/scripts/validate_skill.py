@@ -22,7 +22,6 @@ _configure_stdio_utf8()
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REQUIRED_FILES = [
     "SKILL.md",
-    "README.md",
     "agents/openai.yaml",
     "scripts/sw_preflight.py",
     "scripts/sw_macro_guard.py",
@@ -40,10 +39,7 @@ REQUIRED_FILES = [
     "scripts/sw_session.py",
     "scripts/validate_mcp.py",
     "mcp-server/server.py",
-    "mcp-server/README.md",
     "mcp-server/requirements.txt",
-    "mcp-server/register_all_ai_mcp.js",
-    "mcp-server/register_all_ai_mcp.ps1",
     "examples/08_mini_fan_motion_assembly.py",
     "references/part-modeling.md",
     "references/assembly.md",
@@ -53,9 +49,7 @@ REQUIRED_FILES = [
     "references/review.md",
     "references/complex-hole-features.md",
     "references/motion-study.md",
-    "references/agent-provider-architecture.md",
     "references/complex-mechanical-routing.md",
-    "references/enterprise-agent-rag.md",
     "references/api-lookup.md",
     "references/troubleshooting.md",
 ]
@@ -80,8 +74,8 @@ def check_skill_frontmatter():
 
 
 def check_python_syntax():
-    """检查主脚本、桌面后端、MCP、测试和全部子技能 Python 语法。"""
-    roots = ["scripts", "examples", "tests", "apps/desktop", "mcp-server", "subskills"]
+    """检查主脚本、保留的回归脚本、MCP 和全部子技能 Python 语法。"""
+    roots = ["scripts", "examples", "tests", "mcp-server", "subskills"]
     targets = sorted(
         path
         for relative in roots
@@ -94,10 +88,8 @@ def check_python_syntax():
 
 
 def check_json_files():
-    """检查任务契约、输出契约和设计计划 Schema 是否为有效 JSON。"""
+    """检查设计计划 Schema 是否为有效 JSON。"""
     targets = [
-        ROOT / "apps/desktop/cad_workbench/schemas/automation_job.schema.json",
-        ROOT / "apps/desktop/cad_workbench/schemas/codex_final_response.schema.json",
         ROOT / "subskills/solidworks-vibecad/schemas/design_plan.schema.json",
     ]
     for path in targets:

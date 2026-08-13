@@ -1,6 +1,6 @@
 {
   "name": "solidworks-automation",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Automate a local Windows SolidWorks session through CAD workflows and a bundled stdio MCP server.",
   "author": {
     "name": "wzyn20051216",

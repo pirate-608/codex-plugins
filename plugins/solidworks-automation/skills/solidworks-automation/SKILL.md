@@ -1,7 +1,6 @@
 ---
 name: solidworks-automation
 description: "SolidWorks CAD 自动化技能，可通过 Python COM 接口与 OpenClaw / Codex / Claude 协作控制 Windows 上运行的 SolidWorks，用于零件建模、装配体、工程图、钣金、焊件、仿真、文件导出、自定义属性、设计表、配置管理，以及 OBJ/STL/STEP 等外来模型导入；当用户提到 SolidWorks、SW、OpenClaw、龙虾、3D 建模、CAD、零件、装配、工程图、钣金、焊件、导出 STEP/STL/PDF、BOM、设计表、公开三维模型、网格参考模型、原版外观复刻或高还原产品外观时使用。"
-metadata: { "openclaw": { "homepage": "https://github.com/wzyn20051216/solidworks-automation-skill", "os": ["win32"], "requires": { "anyBins": ["python", "py"] } } }
 ---
 
 # SolidWorks 自动化技能
@@ -81,7 +80,7 @@ session.export(model, r"C:\temp\cylinder.step")
 | 外观与材质 | `scripts/sw_appearance.py` | `references/appearance.md` |
 | 零件建模（草图+特征） | `scripts/sw_part.py` | `references/part-modeling.md` |
 | 盲孔/沉孔/沉头孔/半圆端槽与孔位验收 | `scripts/sw_hole_features.py`、`scripts/sw_review.py` | `references/complex-hole-features.md`、`references/review.md` |
-| 自然语言到参数化设计计划 / VibeCAD | `subskills/solidworks-vibecad/scripts/plan_from_brief.py` | `subskills/solidworks-vibecad/SKILL.md`、`subskills/solidworks-vibecad/README.md` |
+| 自然语言到参数化设计计划 / VibeCAD | `subskills/solidworks-vibecad/scripts/plan_from_brief.py` | `subskills/solidworks-vibecad/SKILL.md` |
 | 多圆角/倒角 CNC 机加工件 | `subskills/solidworks-fillet-chamfer-cnc/scripts/create_cnc_mount_template.py` | `subskills/solidworks-fillet-chamfer-cnc/SKILL.md`、`subskills/solidworks-fillet-chamfer-cnc/references/cnc-fillet-chamfer-lessons.md` |
 | 螺丝孔/螺纹孔、攻丝底孔 | `subskills/solidworks-threaded-holes/scripts/create_threaded_hole_template.py` | `subskills/solidworks-threaded-holes/SKILL.md`、`subskills/solidworks-threaded-holes/references/threaded-hole-lessons.md` |
 | AutoCAD DWG/DXF 二维绘图、线稿转 CAD、批量改图 | `subskills/autocad-automation/scripts/acad_draw.py`、`subskills/autocad-automation/scripts/acad_review.py` | `subskills/autocad-automation/SKILL.md`、`subskills/autocad-automation/references/troubleshooting.md` |
@@ -91,14 +90,11 @@ session.export(model, r"C:\temp\cylinder.step")
 | 文件导出 | `scripts/sw_export.py` | `references/export.md` |
 | OBJ/STL 高还原网格参考导入 | `scripts/sw_import_mesh_reference.py` | `references/mesh-reference-import.md` |
 | 结果自审查 | `scripts/sw_review.py` | `references/review.md` |
-| 本地 MCP Server | `mcp-server/server.py` | `mcp-server/README.md`、`references/mcp-server.md` |
-| MCP 协议验证 | `scripts/validate_mcp.py` | `mcp-server/README.md` |
+| 本地 MCP Server | `mcp-server/server.py` | `references/mcp-server.md` |
+| MCP 协议验证 | `scripts/validate_mcp.py` | `references/mcp-server.md` |
 | 未封装 API 查证 | - | `references/api-lookup.md` |
 | OpenClaw 控制 SolidWorks | - | `references/openclaw.md` |
 | 钣金/焊件/仿真/属性 | - | `references/advanced.md` |
-| 企业 Agent / 本地优先与云 RAG | `apps/desktop/cad_workbench/knowledge_retrieval.py` | `references/enterprise-agent-rag.md` |
-| Codex/Claude/Gemini/OpenCode Provider Adapter | `apps/desktop/cad_workbench/agent_providers.py` | `references/agent-provider-architecture.md` |
-| 综合机械工程 DAG 自动编排 | `apps/desktop/cad_workbench/engineering_orchestrator.py` | `references/complex-mechanical-routing.md` |
 | 常见错误排查 | - | `references/troubleshooting.md` |
 
 ## OpenClaw 协作方式
@@ -132,8 +128,7 @@ from sw_connect import connect_solidworks, mm, deg, new_document
 11. 使用 `session.export()` 或 `sw_export.py` 保存/导出文件。
 12. 使用 `sw_review.py` 导出预览图并自审查；如果有 GUI/桌面截图能力，打开 SolidWorks 视图截图复核。
 13. 遇到钣金、焊件、复杂曲面、模具、Routing、Simulation/FEA、复杂 Motion 或配置族任务，先运行 `sw_capability_probe.py` 并读取 `references/complex-mechanical-routing.md`；`reference_only/not_implemented` 能力不能假装已自动化完成。
-14. 需要企业/项目机械知识时读取 `references/enterprise-agent-rag.md`；默认只用本地知识，云 RAG 必须显式启用、声明 `external_network` 并完成人工审批。
-15. 当一个需求同时跨越零件、孔槽/圆角、装配 Mate、Motion、工程图/BOM 和多格式交付中的两个以上工程域时，调用 `apps/desktop/cad_workbench/engineering_orchestrator.py` 生成阶段 DAG。必须按依赖串行执行关键 CAD 写操作，每阶段独立保存产物和验收证据；局部修改只重规划受影响阶段及其后继，禁止把整项工程塞进一条超长 Prompt 后一次性宣称完成。
+14. 当一个需求跨越零件、孔槽/圆角、装配 Mate、Motion、工程图/BOM 和多格式交付中的两个以上工程域时，先写出有依赖顺序的阶段计划。关键 CAD 写操作必须串行执行，每阶段独立保存产物和验收证据；局部修改只重做受影响阶段及其后继，禁止把整项工程塞进一条超长 Prompt 后一次性宣称完成。
 
 ### 机械图纸默认底线
 
@@ -166,19 +161,18 @@ from sw_connect import connect_solidworks, mm, deg, new_document
 3. 每次设置后调用 `verify_appearance()` 或 `apply_component_palette()` 回读 RGB；只检查 setter 返回值不算通过。
 4. 保存与截图前调用 `model.ClearSelection2(True)`；`sw_review.save_preview()` 已内置该清理。
 5. 目视确认至少三种预期颜色真实可见；“预览非空白”不能替代颜色检查。
-6. 外观异常时先运行 `tests/solidworks_appearance_regression.py`，再重建用户模型。
+6. 外观异常时先在最小样件上调用 `verify_appearance()` 回读 RGB 并生成预览，再决定是否重建用户模型。
 
 ### MCP Server 使用
 
 当用户要求“让 SolidWorks 支持 MCP”“接入 Codex/Claude Desktop 工具调用”“不要每次生成一大段 Python 脚本”时：
 
-1. 读取 `mcp-server/README.md`。
-2. 若用户要求自动配置 MCP，优先运行多客户端注册器：`powershell -ExecutionPolicy Bypass -File mcp-server/register_all_ai_mcp.ps1 -InstallDependencies`；它会尝试注册 Codex、Claude Code、Claude Desktop、Cursor、Windsurf。
-3. 使用本地 `stdio` MCP server：`python mcp-server/server.py`。
-4. 工具调用优先走 `solidworks_health_check`、`solidworks_create_basic_part`、`solidworks_create_hole_feature`、`solidworks_inspect_hole_features`、`solidworks_add_component`、`solidworks_add_coincident_mate`、`solidworks_add_distance_mate`、`solidworks_add_concentric_mate`、`solidworks_set_component_fixed`、`solidworks_export_active`、`solidworks_review_active`、`solidworks_add_rotary_motor`、`solidworks_inspect_motion_studies`、`solidworks_validate_motion_study`。
-5. 不要暴露任意 Python/VBA 执行工具；新增 MCP 工具时应复用 `scripts/sw_*.py` 中已验证封装。
-6. SolidWorks COM 操作必须串行执行；MCP server 内部已使用全局锁降低桌面会话冲突。
-7. 基准 demo 使用 `examples/08_mini_fan_motion_assembly.py`；它验证自动建模、装配、Mate 和 Motion Study，不承诺圆角/倒角外观完美。
+1. 读取 `references/mcp-server.md`。
+2. Codex 插件会通过插件根目录的 `.mcp.json` 启动本地 `stdio` server；手动诊断时运行 `python mcp-server/server.py`。
+3. 工具调用优先走 `solidworks_health_check`、`solidworks_create_basic_part`、`solidworks_create_hole_feature`、`solidworks_inspect_hole_features`、`solidworks_add_component`、`solidworks_add_coincident_mate`、`solidworks_add_distance_mate`、`solidworks_add_concentric_mate`、`solidworks_set_component_fixed`、`solidworks_export_active`、`solidworks_review_active`、`solidworks_add_rotary_motor`、`solidworks_inspect_motion_studies`、`solidworks_validate_motion_study`。
+4. 不要暴露任意 Python/VBA 执行工具；新增 MCP 工具时应复用 `scripts/sw_*.py` 中已验证封装。
+5. SolidWorks COM 操作必须串行执行；MCP server 内部已使用全局锁降低桌面会话冲突。
+6. 基准 demo 使用 `examples/08_mini_fan_motion_assembly.py`；它验证自动建模、装配、Mate 和 Motion Study，不承诺圆角/倒角外观完美。
 
 ### 运动装配体要求
 
