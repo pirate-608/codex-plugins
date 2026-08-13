@@ -25,8 +25,8 @@
       "Count Python files under this workspace with Everything."
     ],
     "brandColor": "#F97316",
-    "composerIcon": "./assets/everything-icon.svg",
-    "logo": "./assets/everything-logo.svg",
-    "logoDark": "./assets/everything-logo-dark.svg"
+    "composerIcon": "./assets/everything.png",
+    "logo": "./assets/everything.png",
+    "logoDark": "./assets/everything.png"
   }
 }
