@@ -1,0 +1,12 @@
+interface:
+  display_name: "Zotero Semantic Search"
+  short_description: "Build and query a local Ollama Zotero index"
+  default_prompt: "Use $zotero-semantic-search to index and semantically search my Zotero library with local Ollama."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "zotero"
+      description: "Local Zotero MCP server"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

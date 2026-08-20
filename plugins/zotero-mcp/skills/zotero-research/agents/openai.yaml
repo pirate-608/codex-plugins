@@ -1,0 +1,12 @@
+interface:
+  display_name: "Zotero Research"
+  short_description: "Search, read, compare, and cite Zotero literature"
+  default_prompt: "Use $zotero-research to find and synthesize relevant papers from my Zotero library."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "zotero"
+      description: "Local Zotero MCP server"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

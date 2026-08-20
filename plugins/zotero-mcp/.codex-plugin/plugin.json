@@ -1,0 +1,33 @@
+{
+  "name": "zotero-mcp",
+  "version": "0.1.0",
+  "description": "Search, read, synthesize, and safely organize a local Zotero library through zotero-mcp with optional Ollama semantic search.",
+  "author": {
+    "name": "pirate-608",
+    "url": "https://github.com/pirate-608"
+  },
+  "homepage": "https://github.com/54yyyu/zotero-mcp",
+  "repository": "https://github.com/pirate-608/codex-plugins",
+  "license": "MIT",
+  "keywords": ["zotero", "research", "literature", "citations", "mcp", "ollama"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Zotero Research Library",
+    "shortDescription": "Research and organize a local Zotero library.",
+    "longDescription": "Search Zotero metadata and full text, read PDFs and annotations, synthesize literature, export bibliographies, manage library records with confirmation, and build a private semantic index using local Ollama bge-m3 embeddings.",
+    "developerName": "pirate-608",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/pirate-608/codex-plugins/tree/main/plugins/zotero-mcp",
+    "defaultPrompt": [
+      "Find and synthesize the most relevant papers in my Zotero library.",
+      "Read this Zotero paper and summarize its methods and findings.",
+      "Check my local Zotero semantic index and update it if needed."
+    ],
+    "brandColor": "#CC2936",
+    "composerIcon": "./assets/zotero.png",
+    "logo": "./assets/zotero.png",
+    "logoDark": "./assets/zotero.png"
+  }
+}

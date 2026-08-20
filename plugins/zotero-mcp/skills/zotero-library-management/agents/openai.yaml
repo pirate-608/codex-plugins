@@ -1,0 +1,12 @@
+interface:
+  display_name: "Zotero Library Management"
+  short_description: "Organize Zotero items, notes, tags, and collections"
+  default_prompt: "Use $zotero-library-management to organize these references in my Zotero library."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "zotero"
+      description: "Local Zotero MCP server"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true
